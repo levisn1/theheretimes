@@ -1,13 +1,14 @@
 require 'net/http'
 require 'json'
-require 'pry'
 
 class Geonames
 
   GEONAMES_USERNAME = "carraragiovanni"
 
-  def initialize(location_data)
+  def initialize(location_data, countries_json_path, languages_json_path)
     @location_data = location_data
+    @countries_json_path = countries_json_path
+    @languages_json_path = languages_json_path
   end
 
   def call
@@ -16,12 +17,11 @@ class Geonames
   end
 
   def get_language
-    file_country = File.read('countries.json')
+    file_country = File.read(@countries_json_path)
     countries = JSON.parse(file_country)
-    # binding.pry
     language_code = countries[@location_data[:country_code]]["languages"]
 
-    file_language = File.read('languages.json')
+    file_language = File.read(@languages_json_path)
     languages = JSON.parse(file_language)
     language = languages[language_code[0]]["name"]
   end

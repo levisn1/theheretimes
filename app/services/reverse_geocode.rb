@@ -47,6 +47,3 @@ class ReverseGeocoding
   end
 end
 
-coordinates = {latitude: 45.46, longitude: 9.18}
-ReverseGeocoding.new(coordinates).call
-

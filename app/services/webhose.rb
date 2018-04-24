@@ -8,7 +8,7 @@ class Webhose
   end
 
   def call
-    results = {}
+    @results = {}
 
     # default: timestamp of 20 days before the api call
     crawl_timestamp = (Time.now - 30*24*60*60).to_i
@@ -38,9 +38,9 @@ class Webhose
 
       output = webhoseio.query('filterWebContent', query_params)
 
-      results[city_name[:name]] = output
+      @results[city_name[:name]] = output
     end
-    results
+    @results
   end
 end
 

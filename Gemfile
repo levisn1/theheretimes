@@ -11,6 +11,8 @@ gem 'rails', '5.1.6'
 gem 'redis'
 gem 'webhoseio-ruby'
 gem 'i18n_data'
+gem 'better_errors'
+gem 'binding_of_caller'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'

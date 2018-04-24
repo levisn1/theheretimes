@@ -1,7 +1,7 @@
 require 'net/http'
 require 'json'
 
-class Geocoding
+class Geocode
 
   GOOGLE_MAPS_GEOCODE_API = "AIzaSyBHf-pI5bEXmml-_C4kOFZKSAuGG9eH1kI"
 
