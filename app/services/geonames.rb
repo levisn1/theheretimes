@@ -22,6 +22,7 @@ class Geonames
     geocode_net_json = JSON.parse(geocode_net.body)
     lng = geocode_net_json["results"][0]["geometry"]["location"]["lng"]
     lat = geocode_net_json["results"][0]["geometry"]["location"]["lat"]
+
     country_code = ""
     geocode_net_json["results"][0]["address_components"].each do |short_name|
       short_name["types"].each do |short_name_types|
@@ -70,6 +71,5 @@ class Geonames
     sorted.each do |city|
       sorted_cities << {name: city["name"], population: city["population"], language: language}
     end
-
-    puts sorted_cities.inspect
+    puts sorted_cities
   end
