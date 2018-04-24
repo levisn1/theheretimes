@@ -68,6 +68,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
+    i18n_data (0.8.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -174,6 +175,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
+    webhoseio-ruby (1.0.0)
     webpacker (3.4.3)
       activesupport (>= 4.2)
       rack-proxy (>= 0.6.1)
@@ -191,6 +193,7 @@ DEPENDENCIES
   devise
   figaro
   font-awesome-sass (~> 4.7)
+  i18n_data
   jbuilder (~> 2.0)
   listen (~> 3.0.5)
   pg (~> 0.21)
@@ -205,6 +208,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   uglifier
   web-console (>= 3.3.0)
+  webhoseio-ruby
   webpacker
 
 RUBY VERSION
