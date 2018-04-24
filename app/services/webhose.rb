@@ -1,64 +1,46 @@
 require_relative 'webhoseio'
 
 class Webhose
-  sorted_cities = [{:name=>"München", :population=>1260391},
-                  {:name=>"Augsburg", :population=>259196},
-                  {:name=>"Regensburg", :population=>5},
-                  {:name=>"Ingolstadt", :population=>120658},
-                  {:name=>"Innsbruck", :population=>112467}]
+  WEBHOSE_KEY = "454c50ef-68d0-43b3-9fea-37c4a9178399"
 
+  def initialize(list_of_sorted_cities)
+    @list_of_sorted_cities = list_of_sorted_cities
+  end
 
-  webhose_key = "454c50ef-68d0-43b3-9fea-37c4a9178399"
+  def call
+    @results = {}
 
-  # default: timestamp of 20 days before the api call
-  crawl_timestamp = (Time.now - 30*24*60*60).to_i
+    # default: timestamp of 20 days before the api call
+    crawl_timestamp = (Time.now - 30*24*60*60).to_i
 
-  # default language of the articles: to be grabbed from the IP (?). Now set to Italian
-  language = "italian"
+    # default language of the articles: to be grabbed from the IP (?). Now set to Italian
+    language = @list_of_sorted_cities[0][:language]
 
-  # sorted_cities = what is returned by the Geonames API
-  sorted_cities.each do |city|
+    @list_of_sorted_cities.each do |city_name|
+      if city_name[:population] > 40000 # when the city has more than 40000 pp we look through the titles of the articles
+        title = "title:"
+        city_query = city_name[:name]
+        time_span = 2
+      else # when the city has more than 40000 pp we look through the titles of the articles
+        title = ""
+        city_query = city_name[:name]
+        time_span = 7
+      end
+      published_timestamp = (Time.now - time_span*24*60*60).to_i
 
-    if city[:population] > 40000
+      webhoseio = Webhoseio.new(WEBHOSE_KEY)
+      query_params = {
+        "q" => title + "#{city_query} language:#{language} site_type:news published:>#{published_timestamp}",
+        "ts" => "#{crawl_timestamp}",
+        "sort" => "performance_score",
+        "size" => "20"
+      }
 
-      # when the city has more than 40000 pp we look through the titles of the articles
-      title = "title:"
-      city_query = city[:name]
+      output = webhoseio.query('filterWebContent', query_params)
 
-      # default: when the city has more than 40000 pp we look through articles published in the last 2 days
-      time_span = 2
-
-
-    else city[:population] < 40000
-
-      # when the city has more than 40000 pp we look through the titles of the articles
-      title = ""
-      city_query = city[:name]
-
-      # default: when the city has more than 40000 pp we look through articles published in the last 2 days
-      time_span = 7
-
+      @results[city_name[:name]] = output
     end
-
-    published_timestamp = (Time.now - time_span*24*60*60).to_i
-
-    # binding.pry
-    webhoseio = Webhoseio.new(webhose_key)
-    query_params = {
-      "q" => title + "#{city_query} language:#{language} site_type:news published:>#{published_timestamp}",
-      "ts" => "#{crawl_timestamp}",
-      "sort" => "performance_score",
-      "size" => "20"
-    }
-
-    output = webhoseio.query('filterWebContent', query_params)
-
-    output[:location] = city_query
-
-    puts output[:location]
-    # puts output['posts'][0]['url']
-    # puts output['posts'][0]['title']
-    # puts output['posts'][0]['text']
-
+    @results
   end
 end
+
