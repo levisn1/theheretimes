@@ -51,7 +51,7 @@ class Geonames
     sorted = sorted.reverse
 
     list_of_sorted_cities = []
-
+    # binding.pry
     sorted.each do |city|
       list_of_sorted_cities << {name: city["name"], population: city["population"], language: get_language}
     end
@@ -59,4 +59,3 @@ class Geonames
     list_of_sorted_cities
   end
 end
-
