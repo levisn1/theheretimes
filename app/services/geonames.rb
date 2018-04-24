@@ -27,7 +27,7 @@ class Geonames
   end
 
   def find_cities_in_the_bounding_box
-    range = 1
+    range = 0.1 # CHANGE WHEN MAP
     north = (@location_data[:latitude] + range).to_s
     south = (@location_data[:latitude] - range).to_s
     east = (@location_data[:longitude] + range).to_s

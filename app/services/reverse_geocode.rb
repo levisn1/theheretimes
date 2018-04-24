@@ -42,8 +42,7 @@ class ReverseGeocoding
       city_name: city_name
      }
 
-    puts location_data
-
+    location_data
   end
 end
 
