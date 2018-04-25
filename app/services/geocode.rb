@@ -28,9 +28,9 @@ class Geocode
 
     location_data = {
       longitude: longitude,
-       latitude: latitude,
-       country_code: country_code,
-       city_name: @city_name
+      latitude: latitude,
+      country_code: country_code,
+      city_name: @city_name
      }
 
     location_data

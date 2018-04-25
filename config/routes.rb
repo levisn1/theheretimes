@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  resources :bookmarks
+
   get 'articles', to: 'articles#index'
 
   devise_for :users
