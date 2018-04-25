@@ -40,7 +40,7 @@ class Geonames
                   + "&east=" + east\
                   + "&west=" + west\
                   + "&lang=" + @location_data[:country_code]\
-                  + "&maxRows=" + 5.to_s\
+                  + "&maxRows=" + 12.to_s\
                   + "&username=" + GEONAMES_USERNAME)
     geonames_net = Net::HTTP.get_response(geonames)
     geonames_net_json = JSON.parse(geonames_net.body)
@@ -53,7 +53,14 @@ class Geonames
 
     list_of_sorted_cities = []
     sorted.each do |city|
-      list_of_sorted_cities << {latitude: city["lat"], longitude: city["lng"], name: city["name"], population: city["population"], language: get_language}
+      list_of_sorted_cities <<
+      {
+        latitude: city["lat"],
+        longitude: city["lng"],
+        name: city["name"],
+        population: city["population"],
+        language: get_language
+      }
     end
 
     list_of_sorted_cities
