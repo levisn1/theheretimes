@@ -40,7 +40,7 @@ class Geonames
                   + "&east=" + east\
                   + "&west=" + west\
                   + "&lang=" + @location_data[:country_code]\
-                  + "&maxRows=" + 12.to_s\
+                  + "&maxRows=" + 2.to_s\
                   + "&username=" + GEONAMES_USERNAME)
     geonames_net = Net::HTTP.get_response(geonames)
     geonames_net_json = JSON.parse(geonames_net.body)
