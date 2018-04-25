@@ -1,7 +1,7 @@
 require_relative 'webhoseio'
 
 class Webhose
-  WEBHOSE_KEY = "454c50ef-68d0-43b3-9fea-37c4a9178399"
+  WEBHOSE_KEY = "70d108cc-914d-48fb-abce-ab1c0d52b3a0"
 
   def initialize(list_of_sorted_cities)
     @list_of_sorted_cities = list_of_sorted_cities
@@ -35,7 +35,7 @@ class Webhose
         "q" => title + "#{city_query} language:#{language} site_type:news published:>#{published_timestamp}",
         "ts" => "#{crawl_timestamp}",
         "sort" => "performance_score",
-        "size" => "20"
+        "size" => "5"
       }
 
       output = webhoseio.query('filterWebContent', query_params)

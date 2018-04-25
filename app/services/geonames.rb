@@ -28,7 +28,7 @@ class Geonames
   end
 
   def find_cities_in_the_bounding_box
-    range = 0.1 # CHANGE WHEN MAP
+    range = 1 # CHANGE WHEN MAP
     north = (@location_data[:latitude] + range).to_s
     south = (@location_data[:latitude] - range).to_s
     east = (@location_data[:longitude] + range).to_s
@@ -40,7 +40,7 @@ class Geonames
                   + "&east=" + east\
                   + "&west=" + west\
                   + "&lang=" + @location_data[:country_code]\
-                  + "&maxRows=" + 12.to_s\
+                  + "&maxRows=" + 2.to_s\
                   + "&username=" + GEONAMES_USERNAME)
     geonames_net = Net::HTTP.get_response(geonames)
     geonames_net_json = JSON.parse(geonames_net.body)
