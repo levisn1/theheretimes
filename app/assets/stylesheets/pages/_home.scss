@@ -1,1 +1,66 @@
 // Specific CSS for your home-page
+.sidenav {
+    height: 100%;
+    width: 357px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #0A2342;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Style page content */
+.main {
+    margin-left: 357px;
+    padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+.logo {
+  height: 250px;
+  border-bottom: 1px solid white
+  // margin-left:auto;
+  // margin-right:auto;
+  // margin: 0 auto;
+}
+
+img {
+  margin-left: 50px;
+}
+
+.user_section {
+  height: 100px;
+  border-bottom: 1px solid white;
+}
+
+.user_name {
+font-family: Roboto;
+font-size: 25px;
+color: #F5F5F5;
+
+}
+
+p {
+  margin: 2px 15px -10.5px;
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 30px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 18px;
+  color: white;
+}
+
+
