@@ -38,6 +38,9 @@ img {
 .user_section {
   height: 100px;
   border-bottom: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .user_name {
@@ -51,16 +54,13 @@ p {
   margin: 2px 15px -10.5px;
 }
 
-.fa {
-  display: inline-block;
-  font: normal normal normal 30px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 18px;
+.iconcina-bll {
+  font-size: 40px;
   color: white;
 }
 
-
+.second-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
