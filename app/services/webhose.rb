@@ -11,7 +11,7 @@ class Webhose
     @results = {}
 
     # default: timestamp of 20 days before the api call
-    crawl_timestamp = (Time.now - 30*24*60*60).to_i
+    crawl_timestamp = ((Date.today - 30*24*60*60).to_time.to_i * 1000).to_s
 
     # default language of the articles: to be grabbed from the IP (?). Now set to Italian
     language = @list_of_sorted_cities[0][:language]
@@ -26,7 +26,9 @@ class Webhose
         city_query = city_name[:name]
         time_span = 7
       end
-      published_timestamp = (Time.now - time_span*24*60*60).to_i
+      published_timestamp = ((Date.today - time_span).to_time.to_i * 1000).to_s
+
+
 
       webhoseio = Webhoseio.new(WEBHOSE_KEY)
       query_params = {
@@ -36,6 +38,7 @@ class Webhose
         "size" => "20"
       }
 
+      # raise
       output = webhoseio.query('filterWebContent', query_params)
 
       @results[city_name[:name]] = output
