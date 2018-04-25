@@ -1,5 +1,6 @@
 require 'net/http'
 require 'json'
+require 'pry'
 
 class Geonames
 
@@ -51,11 +52,19 @@ class Geonames
     sorted = sorted.reverse
 
     list_of_sorted_cities = []
-    # binding.pry
     sorted.each do |city|
-      list_of_sorted_cities << {name: city["name"], population: city["population"], language: get_language}
+      list_of_sorted_cities << {latitude: city["lat"], longitude: city["lng"], name: city["name"], population: city["population"], language: get_language}
     end
 
     list_of_sorted_cities
   end
 end
+
+# location_data = {
+#       longitude: 45.46,
+#       latitude: 9.18,
+#       country_code: "IT",
+#       city_name: "Milan"
+#      }
+# names = Geonames.new(location_data, "countries.json", "languages.json").call
+# puts names
