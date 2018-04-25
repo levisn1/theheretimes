@@ -1,9 +1,12 @@
+<%= render 'shared/map' %>
+
 <% @list_of_sorted_cities.each do |city| %>
 <ul>
   <h2> <%= city[:name] %> </h2>
   <% @results[city[:name]]["posts"].each do |article| %>
   <li>
     <p><%= article["thread"]["title"] %></p>
+    <p><%= article["thread"]["city"] %></p>
   </li>
   <% end %>
 </ul>
