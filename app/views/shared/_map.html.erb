@@ -31,7 +31,9 @@
 
     <% @list_of_sorted_cities.each do |city| %>;
         google.maps.event.addListener(markers["<%= city[:name] %>"], 'click', function() {
-          alert("Welcome to <%= city[:name] %>");
+      <% @results[city[:name]]["posts"].each do |article| %>
+          alert("<%= article["title"] %>");
+      <% end %>;
         });
     <% end %>;
 
