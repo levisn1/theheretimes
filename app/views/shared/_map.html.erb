@@ -3,19 +3,20 @@
 <% center = {} %>
 
 <% @list_of_sorted_cities.each do |city| %>
+  <% instance_variable_set("@marker_#{city[:name]}", {}) %>
+
   <% if city[:name].match?(@city_name) %>
     <% center[:lat] = city[:latitude] %>
     <% center[:lng] = city[:longitude] %>
   <% end %>
 <% end %>
 
-
-
 <div id="map">
 </div>
 <script>
   function initMap() {
     var center = {lat: <%= center[:lat].to_s %>, lng: <%= center[:lng].to_s %>};
+
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: center
@@ -25,6 +26,13 @@
       position: center,
       map: map
     });
+
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+          console.log("West: " + map.getBounds().b.b);
+          console.log("East: " + map.getBounds().b.f);
+          console.log("North: " + map.getBounds().f.f);
+          console.log("South: " + map.getBounds().f.b);
+        });
   }
 </script>
 

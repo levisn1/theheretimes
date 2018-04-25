@@ -35,7 +35,7 @@ class Webhose
         "q" => title + "#{city_query} language:#{language} site_type:news published:>#{published_timestamp}",
         "ts" => "#{crawl_timestamp}",
         "sort" => "performance_score",
-        "size" => "20"
+        "size" => "5"
       }
 
       output = webhoseio.query('filterWebContent', query_params)
