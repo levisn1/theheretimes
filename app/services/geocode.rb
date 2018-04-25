@@ -34,7 +34,6 @@ class Geocode
      }
 
     location_data
-
   end
 end
 
