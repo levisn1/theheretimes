@@ -1,5 +1,6 @@
 <% @bookmarks.each do |bookmark| %>
-<%= bookmark[:title] %>
-<%= bookmark[:city] %>
+<p><%= bookmark[:title] %></p>
+<p><%= bookmark[:lat] %></p>
+<p><%= bookmark[:lng] %></p>
 <br>
 <% end %>
