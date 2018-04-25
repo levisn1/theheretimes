@@ -3,7 +3,6 @@
 <% center = {} %>
 
 <% @list_of_sorted_cities.each do |city| %>
-  <% instance_variable_set("@marker_#{city[:name]}", {lat: city[:latitude], lng: city[:longitude]}) %>
   <% if city[:name].match?(@city_name) %>
     <% center[:lat] = city[:latitude] %>
     <% center[:lng] = city[:longitude] %>
@@ -21,12 +20,20 @@
       center: center
     });
 
-    var list_of_sorted_cities = <%= @list_of_sorted_cities %>;
+    var markers = {};
 
-    var markerCenter = new google.maps.Marker({
-      position: center,
-      map: map
-    });
+    <% @list_of_sorted_cities.each do |city| %>;
+        markers["<%= city[:name] %>"] = new google.maps.Marker({
+          position: {lat: <%= city[:latitude].to_s %>, lng: <%= city[:longitude].to_s %>},
+          map: map
+        });
+    <% end %>;
+
+    <% @list_of_sorted_cities.each do |city| %>;
+        google.maps.event.addListener(markers["<%= city[:name] %>"], 'click', function() {
+          alert("Welcome to <%= city[:name] %>");
+        });
+    <% end %>;
 
     // google.maps.event.addListener(map, 'bounds_changed', function() {
     //       console.log("West: " + map.getBounds().b.b);
