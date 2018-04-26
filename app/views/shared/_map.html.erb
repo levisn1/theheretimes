@@ -59,6 +59,15 @@
 
     google.maps.event.addListener(map, 'idle', function() {
       $.ajax({
+        type: 'PATCH',
+        url: 'http://localhost:3000/api/v1/articles/update',
+        data: { coordinates: { west: map.getBounds().b.b, east: map.getBounds().b.f , north: map.getBounds().f.f, south: map.getBounds().f.b }},
+        dataType: 'json',
+        success: function (data) {
+          // console.log(map.getBounds());
+        }
+      });
+      $.ajax({
         type: 'GET',
         url: 'http://localhost:3000/api/v1/articles',
         data: { get_param: 'value' },
@@ -70,7 +79,10 @@
               map: map
             });
             google.maps.event.addListener(city_markers[index], 'click', function() {
-              alert(element.posts[0].thread.title);
+              console.log(index);
+              element.posts.forEach((article) => {
+                console.log(article.thread.title);
+              });
             });
           });
         }

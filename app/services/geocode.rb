@@ -26,14 +26,18 @@ class Geocode
       end
     end
 
-    location_data = {
+    @location_data = {
       "lng" => longitude,
       "lat" => latitude,
+      "north" => nil,
+      "south" => nil,
+      "east" => nil,
+      "west" => nil,
       "countrycode" => country_code,
       "name" => @city_name
      }
 
-    location_data
+    @location_data
   end
 end
 
