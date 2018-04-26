@@ -27,10 +27,10 @@ class Geocode
     end
 
     location_data = {
-      longitude: longitude,
-      latitude: latitude,
-      country_code: country_code,
-      city_name: @city_name
+      "lng" => longitude,
+      "lat" => latitude,
+      "countrycode" => country_code,
+      "name" => @city_name
      }
 
     location_data
