@@ -27,6 +27,7 @@ class Geonames
     language = languages[language_code[0]]["name"]
   end
 
+
   def get_cities(radius, cities_count)
     range = radius # CHANGE WHEN MAP
     north = (@location_data["lat"] + range).to_s
