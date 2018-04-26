@@ -42,6 +42,7 @@ class Geonames
       + "&lang=" + @location_data["countrycode"]\
       + "&maxRows=" + cities_count.to_s\
       + "&username=" + GEONAMES_USERNAME)
+
     geonames_net = Net::HTTP.get_response(geonames)
     geonames_net_json = JSON.parse(geonames_net.body)
     geonames_net_json["geonames"]
