@@ -16,6 +16,8 @@ class Geocode
     longitude = geocode_net_json["results"][0]["geometry"]["location"]["lng"]
     latitude = geocode_net_json["results"][0]["geometry"]["location"]["lat"]
 
+
+
     country_code = ""
 
     geocode_net_json["results"][0]["address_components"].each do |short_name|

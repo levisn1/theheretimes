@@ -58,26 +58,41 @@
     var city_markers = {};
 
     google.maps.event.addListener(map, 'idle', function() {
-      $.ajax({
-        type: 'PATCH',
-        url: 'http://localhost:3000/api/v1/articles/update',
-        data: { coordinates: { west: map.getBounds().b.b, east: map.getBounds().b.f , north: map.getBounds().f.f, south: map.getBounds().f.b }},
-        dataType: 'json',
-        success: function (data) {
-          // console.log(map.getBounds());
-        }
-      });
+
+      var boundingBox = { coordinates: { west: map.getBounds().b.b, east: map.getBounds().b.f, north: map.getBounds().f.f, south: map.getBounds().f.b }};
+
+      var currentMapCenter = map.getCenter();
+
+      var coordinates = {lat: currentMapCenter.lat(), lng: currentMapCenter.lng()}
+
+      if (RAILS_PARAMS.since) coordinates.since = RAILS_PARAMS.since;
+
+
+
+      // $.ajax({
+      //   type: 'PATCH',
+      //   url: 'http://localhost:3000/api/v1/articles/update',
+      //   data: boundingBox,
+      //   dataType: 'json',
+      //   success: function (data) {
+      //     // console.log(map.getBounds());
+      //   }
+      // });
+
       $.ajax({
         type: 'GET',
         url: 'http://localhost:3000/api/v1/articles',
-        data: { get_param: 'value' },
+        data: coordinates,
         dataType: 'json',
         success: function (data) {
+          console.log(data);
+
           $.each(data, function(index, element) {
             city_markers[index] = new google.maps.Marker({
               position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
               map: map
             });
+
             google.maps.event.addListener(city_markers[index], 'click', function() {
               console.log(index);
               element.posts.forEach((article) => {
@@ -87,14 +102,6 @@
           });
         }
       });
-    });
-
-
-    google.maps.event.addListener(map, 'idle', function() {
-      // console.log("West: " + map.getBounds().b.b);
-      // console.log("East: " + map.getBounds().b.f);
-      // console.log("North: " + map.getBounds().f.f);
-      // console.log("South: " + map.getBounds().f.b);
     });
 
   }
