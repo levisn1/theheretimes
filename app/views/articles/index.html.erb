@@ -1,6 +1,6 @@
 <%= render 'shared/map' %>
-<%= render 'shared/sidenav' %>
 
+<div class="main">
 <% @list_of_sorted_cities.each do |city| %>
 <ul>
   <h2> <%= city[:name] %> </h2>
@@ -12,3 +12,4 @@
   <% end %>
 </ul>
 <% end %>
+</div>

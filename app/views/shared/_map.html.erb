@@ -27,11 +27,11 @@
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-
     var markers = [];
 
     searchBox.addListener('places_changed', function() {
       var places = searchBox.getPlaces();
+
 
       if (places.length == 0) {
         return;
@@ -55,33 +55,55 @@
       map.fitBounds(bounds);
     });
 
-
-
     var city_markers = {};
 
-    <% @list_of_sorted_cities.each do |city| %>;
-        city_markers["<%= city[:name] %>"] = new google.maps.Marker({
-          position: {lat: <%= city[:latitude].to_s %>, lng: <%= city[:longitude].to_s %>},
-          map: map
-        });
-    <% end %>;
+    google.maps.event.addListener(map, 'idle', function() {
 
-    <% @list_of_sorted_cities.each do |city| %>;
-        google.maps.event.addListener(city_markers["<%= city[:name] %>"], 'click', function() {
-        <% @results[city[:name]]["posts"].each do |article| %>;
-          // console.log("<%= article["title"] %>");
-      <% end %>;
-        });
-    <% end %>;
+      var boundingBox = { coordinates: { west: map.getBounds().b.b, east: map.getBounds().b.f, north: map.getBounds().f.f, south: map.getBounds().f.b }};
 
-    debugger;
+      var currentMapCenter = map.getCenter();
 
-    google.maps.event.addListener(map, 'bounds_changed', function() {
-      console.log("West: " + map.getBounds().b.b);
-      console.log("East: " + map.getBounds().b.f);
-      console.log("North: " + map.getBounds().f.f);
-      console.log("South: " + map.getBounds().f.b);
+      var coordinates = {lat: currentMapCenter.lat(), lng: currentMapCenter.lng()}
+
+      if (RAILS_PARAMS.since) coordinates.since = RAILS_PARAMS.since;
+
+
+
+      // $.ajax({
+      //   type: 'PATCH',
+      //   url: 'http://localhost:3000/api/v1/articles/update',
+      //   data: boundingBox,
+      //   dataType: 'json',
+      //   success: function (data) {
+      //     // console.log(map.getBounds());
+      //   }
+      // });
+
+      $.ajax({
+        type: 'GET',
+        url: 'http://localhost:3000/api/v1/articles',
+        data: coordinates,
+        dataType: 'json',
+        success: function (data) {
+          console.log(data);
+
+          $.each(data, function(index, element) {
+            city_markers[index] = new google.maps.Marker({
+              position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
+              map: map
+            });
+
+            google.maps.event.addListener(city_markers[index], 'click', function() {
+              console.log(index);
+              element.posts.forEach((article) => {
+                console.log(article.thread.title);
+              });
+            });
+          });
+        }
+      });
     });
+
   }
 </script>
 
