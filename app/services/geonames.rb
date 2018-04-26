@@ -33,7 +33,7 @@ class Geonames
     if @list_of_cities.any? { |city| city["name"].strip.downcase == @location_data["name"].strip.downcase }
       "Ok"
     else
-      @list_of_cities << get_cities(1, 1)[0]
+      @list_of_cities << get_cities(0.001, 1)[0]
     end
 
     @list_of_cities.uniq!

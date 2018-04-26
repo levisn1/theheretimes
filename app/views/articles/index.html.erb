@@ -1,15 +1,15 @@
 <%= render 'shared/map' %>
 
 <div class="main">
-<% @list_of_sorted_cities.each do |city| %>
-<ul>
-  <h2> <%= city[:name] %> </h2>
-  <% @results[city[:name]]["posts"].each do |article| %>
-  <li>
-    <p><%= article["thread"]["title"] %></p>
-    <%= link_to "Bookmark this article", bookmarks_path(:URL => article["thread"]["url"], :title => article["thread"]["title"], :category => article["thread"]["site_categories"], :lat => article["thread"]["latitude"], :lng => article["thread"]["longitude"]), :method => :post %>
-  </li>
+  <% @list_of_sorted_cities.each do |city| %>
+  <ul>
+    <h2> <%= city[:name] %> </h2>
+    <% @results[city[:name]]["posts"].each do |article| %>
+    <li>
+      <p><%= article["thread"]["title"] %></p>
+      <p><%= link_to "Bookmark this article", bookmarks_path(:url => article["thread"]["url"], :title => article["thread"]["title"], :category => article["thread"]["site_categories"], :city => article["thread"]["city"], :lat => article["thread"]["latitude"], :lng => article["thread"]["longitude"]), :method => :post %><p>
+    </li>
+    <% end %>
+  </ul>
   <% end %>
-</ul>
-<% end %>
 </div>
