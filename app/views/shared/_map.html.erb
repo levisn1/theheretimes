@@ -27,11 +27,11 @@
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-
     var markers = [];
 
     searchBox.addListener('places_changed', function() {
       var places = searchBox.getPlaces();
+
 
       if (places.length == 0) {
         return;
@@ -55,33 +55,33 @@
       map.fitBounds(bounds);
     });
 
-
-
     var city_markers = {};
 
-    <% @list_of_sorted_cities.each do |city| %>;
-        city_markers["<%= city[:name] %>"] = new google.maps.Marker({
-          position: {lat: <%= city[:latitude].to_s %>, lng: <%= city[:longitude].to_s %>},
-          map: map
-        });
-    <% end %>;
-
-    <% @list_of_sorted_cities.each do |city| %>;
-        google.maps.event.addListener(city_markers["<%= city[:name] %>"], 'click', function() {
-        <% @results[city[:name]]["posts"].each do |article| %>;
-          // console.log("<%= article["title"] %>");
-      <% end %>;
-        });
-    <% end %>;
-
-    debugger;
-
-    google.maps.event.addListener(map, 'bounds_changed', function() {
-      console.log("West: " + map.getBounds().b.b);
-      console.log("East: " + map.getBounds().b.f);
-      console.log("North: " + map.getBounds().f.f);
-      console.log("South: " + map.getBounds().f.b);
+    google.maps.event.addListener(map, 'idle', function() {
+      $.ajax({
+        type: 'GET',
+        url: 'http://localhost:3000/api/v1/articles',
+        data: { get_param: 'value' },
+        dataType: 'json',
+        success: function (data) {
+          $.each(data, function(index, element) {
+            console.log(index);
+            city_markers[index] = new google.maps.Marker({
+              position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
+              map: map
+            });
+          });
+        }
+      });
     });
+
+    google.maps.event.addListener(map, 'idle', function() {
+      // console.log("West: " + map.getBounds().b.b);
+      // console.log("East: " + map.getBounds().b.f);
+      // console.log("North: " + map.getBounds().f.f);
+      // console.log("South: " + map.getBounds().f.b);
+    });
+
   }
 </script>
 
