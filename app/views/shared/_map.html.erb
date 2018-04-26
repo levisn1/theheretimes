@@ -9,43 +9,82 @@
   <% end %>
 <% end %>
 
-<div id="map">
-</div>
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+<div id="map"></div>
 <script>
-  function initMap() {
+  function initAutocomplete() {
     var center = {lat: <%= center[:lat].to_s %>, lng: <%= center[:lng].to_s %>};
+
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: center
     });
 
-    var markers = {};
+    var input = document.getElementById('pac-input');
+
+    var searchBox = new google.maps.places.SearchBox(input);
+
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+
+    var markers = [];
+
+    searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+
+      // For each place, get the icon, name and location.
+      var bounds = new google.maps.LatLngBounds();
+      places.forEach(function(place) {
+        if (!place.geometry) {
+          console.log("Returned place contains no geometry");
+          return;
+        }
+
+        if (place.geometry.viewport) {
+          // Only geocodes have viewport.
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
+        }
+      });
+      map.fitBounds(bounds);
+    });
+
+
+
+    var city_markers = {};
 
     <% @list_of_sorted_cities.each do |city| %>;
-        markers["<%= city[:name] %>"] = new google.maps.Marker({
+        city_markers["<%= city[:name] %>"] = new google.maps.Marker({
           position: {lat: <%= city[:latitude].to_s %>, lng: <%= city[:longitude].to_s %>},
           map: map
         });
     <% end %>;
 
     <% @list_of_sorted_cities.each do |city| %>;
-        google.maps.event.addListener(markers["<%= city[:name] %>"], 'click', function() {
-      <% @results[city[:name]]["posts"].each do |article| %>
-          alert("<%= article["title"] %>");
+        google.maps.event.addListener(city_markers["<%= city[:name] %>"], 'click', function() {
+        <% @results[city[:name]]["posts"].each do |article| %>;
+          // console.log("<%= article["title"] %>");
       <% end %>;
         });
     <% end %>;
 
-    // google.maps.event.addListener(map, 'bounds_changed', function() {
-    //       console.log("West: " + map.getBounds().b.b);
-    //       console.log("East: " + map.getBounds().b.f);
-    //       console.log("North: " + map.getBounds().f.f);
-    //       console.log("South: " + map.getBounds().f.b);
-    //     });
+    debugger;
+
+    google.maps.event.addListener(map, 'bounds_changed', function() {
+      console.log("West: " + map.getBounds().b.b);
+      console.log("East: " + map.getBounds().b.f);
+      console.log("North: " + map.getBounds().f.f);
+      console.log("South: " + map.getBounds().f.b);
+    });
   }
 </script>
 
-<script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5OLpTd7Q483-N9EAcaQzkm7pXgRgBGm4&callback=initMap">
-</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5OLpTd7Q483-N9EAcaQzkm7pXgRgBGm4&libraries=places&callback=initAutocomplete"
+ async defer></script>
+
