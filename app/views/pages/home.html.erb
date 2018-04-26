@@ -1,1 +1,38 @@
-<p>find in pages</p>
+
+<div class="sidenav">
+  <div class="logo">
+   <%= image_tag "tht.png"%>
+  </div>
+  <div class="user_section">
+    <% if user_signed_in? %>
+    <div>
+      <p class="user_name">Mike Giuliani</p>
+      <p>mike@test.it</p>
+    </div>
+
+    <div class="second-section">
+      <%= link_to bookmarks_path, class: "bookmark-home" do %>
+        <%= image_tag "book.svg", height: 40 %>
+      <% end %>
+
+       <%= link_to destroy_user_session_path, method: :delete do %>
+        <i class="fa fa-sign-out iconcina-bll"></i>  <%= t(".sign_out", default: "") %>
+       <% end %>
+    </div>
+      <% else %>
+        <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+    <% end %>
+  </div>
+  <div>
+    <p>Categoty</p>
+
+  </div>
+</div>
+
+
+
+<div class="main">
+<h1>Pages#home</h1>
+<p>Find me in app/views/pages/home.html.erb</p>
+
+</div>
