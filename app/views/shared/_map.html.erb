@@ -65,15 +65,18 @@
         dataType: 'json',
         success: function (data) {
           $.each(data, function(index, element) {
-            console.log(index);
             city_markers[index] = new google.maps.Marker({
               position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
               map: map
+            });
+            google.maps.event.addListener(city_markers[index], 'click', function() {
+              alert(element.posts[0].thread.title);
             });
           });
         }
       });
     });
+
 
     google.maps.event.addListener(map, 'idle', function() {
       // console.log("West: " + map.getBounds().b.b);
