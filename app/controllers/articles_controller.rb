@@ -1,17 +1,9 @@
 class ArticlesController < ApplicationController
   def index
-    if params[:lat] && params[:lng]
-      @location_data = ReverseGeocode.new(params).call
-    else
-      @city_name = "Milan"
-      @location_data = Geocode.new(@city_name).call
-    end
-
-    @list_of_sorted_cities = Geonames.new(@location_data, "app/services/countries.json", "app/services/languages.json").call
-
-    @results = Rails.cache.fetch("articles-#{@list_of_sorted_cities}-#{params[:since]}", expires_in: 2.hours) do
-      Webhose.new(@list_of_sorted_cities).call(params[:since])
-    end
+    api = ApplicationRecord.api(params)
+    @city_name = api[:city_name]
+    @list_of_sorted_cities = api[:list_of_sorted_cities]
+    @results = api[:articles]
   end
 end
 
