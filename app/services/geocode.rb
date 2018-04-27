@@ -16,6 +16,8 @@ class Geocode
     longitude = geocode_net_json["results"][0]["geometry"]["location"]["lng"]
     latitude = geocode_net_json["results"][0]["geometry"]["location"]["lat"]
 
+
+
     country_code = ""
 
     geocode_net_json["results"][0]["address_components"].each do |short_name|
@@ -26,14 +28,18 @@ class Geocode
       end
     end
 
-    location_data = {
-      longitude: longitude,
-      latitude: latitude,
-      country_code: country_code,
-      city_name: @city_name
+    @location_data = {
+      "lng" => longitude,
+      "lat" => latitude,
+      "north" => nil,
+      "south" => nil,
+      "east" => nil,
+      "west" => nil,
+      "countrycode" => country_code,
+      "name" => @city_name
      }
 
-    location_data
+    @location_data
   end
 end
 

@@ -1,4 +1,4 @@
-class ArticlesController < ApplicationController
+class Api::V1::ArticlesController < Api::V1::BaseController
   def index
     api = ApplicationRecord.api(params)
     @city_name = api[:city_name]
@@ -6,10 +6,3 @@ class ArticlesController < ApplicationController
     @results = api[:articles]
   end
 end
-
-
-
-
-
-
-

@@ -20,7 +20,7 @@ class Geonames
   def get_language
     file_country = File.read(@countries_json_path)
     countries = JSON.parse(file_country)
-    language_code = countries[@location_data[:country_code]]["languages"]
+    language_code = countries[@location_data["countrycode"]]["languages"]
 
     file_language = File.read(@languages_json_path)
     languages = JSON.parse(file_language)
@@ -28,31 +28,24 @@ class Geonames
   end
 
   def find_cities_in_the_bounding_box
-    range = 1 # CHANGE WHEN MAP
-    north = (@location_data[:latitude] + range).to_s
-    south = (@location_data[:latitude] - range).to_s
-    east = (@location_data[:longitude] + range).to_s
-    west = (@location_data[:longitude] - range).to_s
+    @list_of_cities = get_cities(1, 5)
 
-    geonames = URI("http://api.geonames.org/citiesJSON?"\
-                  + "north=" + north\
-                  + "&south=" + south\
-                  + "&east=" + east\
-                  + "&west=" + west\
-                  + "&lang=" + @location_data[:country_code]\
-                  + "&maxRows=" + 2.to_s\
-                  + "&username=" + GEONAMES_USERNAME)
-    geonames_net = Net::HTTP.get_response(geonames)
-    geonames_net_json = JSON.parse(geonames_net.body)
-    @list_of_cities = geonames_net_json["geonames"]
-
-    sorted = @list_of_cities.sort_by do |city|
-      city["population"]
+    if @list_of_cities.any? { |city| city["name"].strip.downcase == @location_data["name"].strip.downcase }
+      "Ok"
+    else
+      @list_of_cities << get_cities(0.001, 1)[0]
     end
-    sorted = sorted.reverse
+
+    @list_of_cities.uniq!
+
+    # sorted = @list_of_cities.sort_by do |city|
+    #   city["population"]
+    # end
+    # sorted = sorted.reverse
 
     list_of_sorted_cities = []
-    sorted.each do |city|
+
+    @list_of_cities.each do |city|
       list_of_sorted_cities <<
       {
         latitude: city["lat"],
@@ -62,16 +55,27 @@ class Geonames
         language: get_language
       }
     end
-
     list_of_sorted_cities
   end
-end
 
-# location_data = {
-#       longitude: 45.46,
-#       latitude: 9.18,
-#       country_code: "IT",
-#       city_name: "Milan"
-#      }
-# names = Geonames.new(location_data, "countries.json", "languages.json").call
-# puts names
+  def get_cities(radius, cities_count)
+    range = radius # CHANGE WHEN MAP
+    north = (@location_data["lat"] + range).to_s
+    south = (@location_data["lat"] - range).to_s
+    east = (@location_data["lng"] + range).to_s
+    west = (@location_data["lng"] - range).to_s
+
+    geonames = URI("http://api.geonames.org/citiesJSON?"\
+      + "north=" + north\
+      + "&south=" + south\
+      + "&east=" + east\
+      + "&west=" + west\
+      + "&lang=" + @location_data["countrycode"]\
+      + "&maxRows=" + cities_count.to_s\
+      + "&username=" + GEONAMES_USERNAME)
+
+    geonames_net = Net::HTTP.get_response(geonames)
+    geonames_net_json = JSON.parse(geonames_net.body)
+    geonames_net_json["geonames"]
+  end
+end
