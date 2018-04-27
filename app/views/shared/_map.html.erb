@@ -31,7 +31,6 @@
     searchBox.addListener('places_changed', function() {
       var places = searchBox.getPlaces();
 
-
       if (places.length == 0) {
         return;
       }
@@ -80,13 +79,14 @@
             google.maps.event.addListener(cityMarkers[index], 'click', function() {
 
 
+                // debugger;
               infoWindow[index] = new google.maps.InfoWindow({
                 content: '<h5>' + [index] + '</h5>' +
-                 '<br>' + element.posts[0].thread.title + '<br>' + element.posts[0].thread.url +
-                 '<br>' + element.posts[1].thread.title + '<br>' + element.posts[1].thread.url +
-                 '<br>' + element.posts[2].thread.title + '<br>' + element.posts[2].thread.url +
-                 '<br>' + element.posts[3].thread.title + '<br>' + element.posts[3].thread.url +
-                 '<br>' + element.posts[4].thread.title + '<br>' + element.posts[4].thread.url
+                 '<br>' + '<img src="//logo.clearbit.com/' + element.posts[0].thread.site_full + '?size=30"> ' + '<a href="' + element.posts[0].thread.url + '"" target="_blank">' + element.posts[0].thread.title + '</a>' + '<br>' +
+                 '<br>' + '<img src="//logo.clearbit.com/' + element.posts[1].thread.site_full + '?size=30"> ' + '<a href="' + element.posts[1].thread.url + '"" target="_blank">' + element.posts[1].thread.title + '</a>' + '<br>' +
+                 '<br>' + '<img src="//logo.clearbit.com/' + element.posts[2].thread.site_full + '?size=30"> ' + '<a href="' + element.posts[2].thread.url + '"" target="_blank">' + element.posts[2].thread.title + '</a>' + '<br>' +
+                 '<br>' + '<img src="//logo.clearbit.com/' + element.posts[3].thread.site_full + '?size=30"> ' + '<a href="' + element.posts[3].thread.url + '"" target="_blank">' + element.posts[3].thread.title + '</a>' + '<br>' +
+                 '<br>' + '<img src="//logo.clearbit.com/' + element.posts[4].thread.site_full + '?size=30"> ' + '<a href="' + element.posts[4].thread.url + '"" target="_blank">' + element.posts[4].thread.title + '</a>'
               });
 
               cityMarkers[index].addListener('click', function() {
