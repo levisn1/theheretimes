@@ -15,11 +15,21 @@
   function initAutocomplete() {
     var center = {lat: <%= center[:lat].to_s %>, lng: <%= center[:lng].to_s %>};
 
-
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: center
     });
+
+
+
+
+
+
+
+
+
+
+
 
     var input = document.getElementById('pac-input');
 
@@ -27,7 +37,8 @@
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    var markers = [];
+
+
 
     searchBox.addListener('places_changed', function() {
       var places = searchBox.getPlaces();
@@ -37,7 +48,6 @@
         return;
       }
 
-      // For each place, get the icon, name and location.
       var bounds = new google.maps.LatLngBounds();
       places.forEach(function(place) {
         if (!place.geometry) {
@@ -46,7 +56,6 @@
         }
 
         if (place.geometry.viewport) {
-          // Only geocodes have viewport.
           bounds.union(place.geometry.viewport);
         } else {
           bounds.extend(place.geometry.location);
@@ -55,7 +64,11 @@
       map.fitBounds(bounds);
     });
 
-    var city_markers = {};
+    var cityMarkers = {};
+    var contentCity = {};
+    var contentBody = {};
+    var contentURL = {};
+    var infoWindow = {};
 
     google.maps.event.addListener(map, 'idle', function() {
 
@@ -67,36 +80,30 @@
 
       if (RAILS_PARAMS.since) coordinates.since = RAILS_PARAMS.since;
 
-
-
-      // $.ajax({
-      //   type: 'PATCH',
-      //   url: 'http://localhost:3000/api/v1/articles/update',
-      //   data: boundingBox,
-      //   dataType: 'json',
-      //   success: function (data) {
-      //     // console.log(map.getBounds());
-      //   }
-      // });
-
       $.ajax({
         type: 'GET',
         url: 'http://localhost:3000/api/v1/articles',
         data: coordinates,
         dataType: 'json',
         success: function (data) {
-          console.log(data);
-
           $.each(data, function(index, element) {
-            city_markers[index] = new google.maps.Marker({
+            cityMarkers[index] = new google.maps.Marker({
               position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
               map: map
             });
 
-            google.maps.event.addListener(city_markers[index], 'click', function() {
-              console.log(index);
-              element.posts.forEach((article) => {
-                console.log(article.thread.title);
+
+            google.maps.event.addListener(cityMarkers[index], 'click', function() {
+              contentCity[index] = '<h5>' + [index] + '</h5>';
+              contentBody[index] = '<p><div class="scrollFix">' + element.posts[0].thread.title + '</div></p>';
+              contentURL[index] = element.posts[0].thread.url;
+
+              infoWindow[index] = new google.maps.InfoWindow({
+                content: contentCity[index] + '<br>' + contentBody[index] + '<br>' + contentURL[index]
+              });
+
+              cityMarkers[index].addListener('click', function() {
+                infoWindow[index].open(map, cityMarkers[index]);
               });
             });
           });
