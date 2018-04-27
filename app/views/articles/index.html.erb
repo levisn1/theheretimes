@@ -1,15 +1,6 @@
 <%= render 'shared/map' %>
 
 <div class="main">
-
-<!--   <div class="filters">
-    <%= link_to "Articles from yesterday", articles_path(since: 1) %>
-    <%= link_to "Articles of the last 3 days", articles_path(since: 3) %>
-    <%= link_to "Articles of the last week", articles_path(since: 7) %>
-    <%= link_to "Articles of the month", articles_path(since: 30) %>
-  </div>
- -->
-
   <% @list_of_sorted_cities.each do |city| %>
   <ul>
     <h2> <%= city[:name] %> </h2>
