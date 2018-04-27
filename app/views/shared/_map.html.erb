@@ -9,8 +9,10 @@
   <% end %>
 <% end %>
 
+
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map"></div>
+<div class="spinner"></div>
 <script>
   function initAutocomplete() {
 
@@ -320,7 +322,14 @@
         url: 'http://localhost:3000/api/v1/articles',
         data: coordinates,
         dataType: 'json',
+        beforeSend: function(){
+          $('.spinner').show()
+        },
+        complete: function(){
+          $('.spinner').hide();
+        },
         success: function (data) {
+
           $.each(data, function(index, element) {
             cityMarkers[index] = new google.maps.Marker({
               position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
