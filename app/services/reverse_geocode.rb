@@ -3,8 +3,6 @@ require 'json'
 require 'pry'
 
 
-# ReverseGeocode.new({lng: 8.42913377137495, lat: 44.87315459992018}).call
-
 class ReverseGeocode
 
   GOOGLE_MAPS_GEOCODE_API = "AIzaSyBHf-pI5bEXmml-_C4kOFZKSAuGG9eH1kI"
@@ -53,10 +51,10 @@ class ReverseGeocode
     location_data = {
       "lng" => longitude,
       "lat" => latitude,
-      "north" => nil,
-      "south" => nil,
-      "east" => nil,
-      "west" => nil,
+      "north" => @coordinates[:north].to_s,
+      "south" => @coordinates[:south].to_s,
+      "east" => @coordinates[:east].to_s,
+      "west" => @coordinates[:west].to_s,
       "countrycode" => country_code,
       "name" => city_name
      }
