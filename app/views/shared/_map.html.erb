@@ -15,11 +15,21 @@
   function initAutocomplete() {
     var center = {lat: <%= center[:lat].to_s %>, lng: <%= center[:lng].to_s %>};
 
-
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: center
     });
+
+
+
+
+
+
+
+
+
+
+
 
     var input = document.getElementById('pac-input');
 
@@ -55,7 +65,7 @@
       map.fitBounds(bounds);
     });
 
-    var city_markers = {};
+    var citymarkers = {};
 
     google.maps.event.addListener(map, 'idle', function() {
 
@@ -67,42 +77,31 @@
 
       if (RAILS_PARAMS.since) coordinates.since = RAILS_PARAMS.since;
 
-
-
-      // $.ajax({
-      //   type: 'PATCH',
-      //   url: 'http://localhost:3000/api/v1/articles/update',
-      //   data: boundingBox,
-      //   dataType: 'json',
-      //   success: function (data) {
-      //     // console.log(map.getBounds());
-      //   }
-      // });
-
       $.ajax({
         type: 'GET',
         url: 'http://localhost:3000/api/v1/articles',
         data: coordinates,
         dataType: 'json',
         success: function (data) {
-          console.log(data);
-
           $.each(data, function(index, element) {
-            city_markers[index] = new google.maps.Marker({
+            citymarkers[index] = new google.maps.Marker({
               position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
               map: map
             });
 
-            var content[index] = "Banana";
+            var contentString = {};
+            var infowindow = {};
 
-            var infowindow = new google.maps.InfoWindow({
-              content: "banana"
-            });
+            google.maps.event.addListener(citymarkers[index], 'click', function() {
+              contentString[index] = element.posts[0].thread.title;
 
-            google.maps.event.addListener(city_markers[index], 'click', function() {
-              console.log(index);
-              element.posts.forEach((article) => {
-                infowindow.open(map, city_markers[index]);
+              infowindow[index] = new google.maps.InfoWindow({
+                content: contentString[index],
+                maxWidth: 200
+              });
+
+              citymarkers[index].addListener('click', function() {
+                infowindow[index].open(map, citymarkers[index]);
               });
             });
           });
