@@ -1,7 +1,7 @@
 // Specific CSS for your home-page
 .sidenav {
     height: 100%;
-    width: 357px;
+    width: 25%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -13,8 +13,7 @@
 
 /* Style page content */
 .main {
-    margin-left: 357px;
-    padding: 0px 10px;
+    margin-left: 25%;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
