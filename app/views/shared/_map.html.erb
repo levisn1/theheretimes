@@ -12,7 +12,9 @@
 
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map"></div>
-<div class="spinner"></div>
+<div class="loader">
+  <span>{</span><span>}</span>
+</div>
 <script>
   function initAutocomplete() {
 
@@ -323,10 +325,10 @@
         data: coordinates,
         dataType: 'json',
         beforeSend: function(){
-          $('.spinner').show()
+          $('.loader').show()
         },
         complete: function(){
-          $('.spinner').hide();
+          $('.loader').hide();
         },
         success: function (data) {
 
