@@ -27,6 +27,37 @@ class Geonames
     language = languages[language_code[0]]["name"]
   end
 
+  def find_cities_in_the_bounding_box
+    @list_of_cities = get_cities(1, 5)
+
+    if @list_of_cities.any? { |city| city["name"].strip.downcase == @location_data["name"].strip.downcase }
+      "Ok"
+    else
+      @list_of_cities << get_cities(0.001, 1)[0]
+    end
+
+    @list_of_cities.uniq!
+
+    # sorted = @list_of_cities.sort_by do |city|
+    #   city["population"]
+    # end
+    # sorted = sorted.reverse
+
+    list_of_sorted_cities = []
+
+    @list_of_cities.each do |city|
+      list_of_sorted_cities <<
+      {
+        latitude: city["lat"],
+        longitude: city["lng"],
+        name: city["name"],
+        population: city["population"],
+        language: get_language
+      }
+    end
+    list_of_sorted_cities
+  end
+
   def get_cities(radius, cities_count)
     range = radius # CHANGE WHEN MAP
     north = (@location_data["lat"] + range).to_s
@@ -47,36 +78,4 @@ class Geonames
     geonames_net_json = JSON.parse(geonames_net.body)
     geonames_net_json["geonames"]
   end
-
-  def find_cities_in_the_bounding_box
-    @list_of_cities = get_cities(1, 3)
-
-    if @list_of_cities.any? { |city| city["name"].strip.downcase == @location_data["name"].strip.downcase }
-      "Ok"
-    else
-      @list_of_cities << get_cities(0.001, 1)[0]
-    end
-
-    @list_of_cities.uniq!
-
-    sorted = @list_of_cities.sort_by do |city|
-      city["population"]
-    end
-
-    sorted = sorted.reverse
-    list_of_sorted_cities = []
-    sorted.each do |city|
-      list_of_sorted_cities <<
-      {
-        latitude: city["lat"],
-        longitude: city["lng"],
-        name: city["name"],
-        population: city["population"],
-        language: get_language
-      }
-    end
-    list_of_sorted_cities
-  end
 end
-
-

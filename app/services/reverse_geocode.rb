@@ -2,7 +2,10 @@ require 'net/http'
 require 'json'
 require 'pry'
 
-class ReverseGeocoding
+
+# ReverseGeocode.new({lng: 8.42913377137495, lat: 44.87315459992018}).call
+
+class ReverseGeocode
 
   GOOGLE_MAPS_GEOCODE_API = "AIzaSyBHf-pI5bEXmml-_C4kOFZKSAuGG9eH1kI"
 
@@ -11,11 +14,11 @@ class ReverseGeocoding
   end
 
   def call
-    geocode = URI("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + @coordinates[:latitude].to_s + "," + @coordinates[:longitude].to_s + "&key=" + GOOGLE_MAPS_GEOCODE_API)
+    geocode = URI("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + @coordinates[:lat].to_s + "," + @coordinates[:lng].to_s + "&key=" + GOOGLE_MAPS_GEOCODE_API)
     geocode_net = Net::HTTP.get_response(geocode)
     geocode_net_json = JSON.parse(geocode_net.body)
-    latitude = @coordinates[:latitude]
-    longitude = @coordinates[:longitude]
+    latitude = @coordinates[:lat].to_f
+    longitude = @coordinates[:lng].to_f
 
     country_code = ""
     geocode_net_json["results"][0]["address_components"].each do |short_name|
@@ -26,20 +29,36 @@ class ReverseGeocoding
       end
     end
 
+    # binding.pry
+
     city_name = ""
+    # geocode_net_json["results"].each do |result|
+    #   result
+    # end
+
     geocode_net_json["results"][0]["address_components"].each do |short_name|
       short_name["types"].each do |short_name_types|
         if short_name_types == "locality"
           city_name = short_name["short_name"]
         end
+
+        if short_name_types == "locality"
+          city_name = short_name["long_name"]
+        end
+
+        break if not city_name.blank?
       end
     end
 
     location_data = {
-      longitude: longitude,
-      latitude: latitude,
-      country_code: country_code,
-      city_name: city_name
+      "lng" => longitude,
+      "lat" => latitude,
+      "north" => nil,
+      "south" => nil,
+      "east" => nil,
+      "west" => nil,
+      "countrycode" => country_code,
+      "name" => city_name
      }
 
     location_data

@@ -15,11 +15,21 @@
   function initAutocomplete() {
     var center = {lat: <%= center[:lat].to_s %>, lng: <%= center[:lng].to_s %>};
 
-
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: center
     });
+
+
+
+
+
+
+
+
+
+
+
 
     var input = document.getElementById('pac-input');
 
@@ -28,16 +38,16 @@
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
 
-    var markers = [];
+
 
     searchBox.addListener('places_changed', function() {
       var places = searchBox.getPlaces();
+
 
       if (places.length == 0) {
         return;
       }
 
-      // For each place, get the icon, name and location.
       var bounds = new google.maps.LatLngBounds();
       places.forEach(function(place) {
         if (!place.geometry) {
@@ -46,7 +56,6 @@
         }
 
         if (place.geometry.viewport) {
-          // Only geocodes have viewport.
           bounds.union(place.geometry.viewport);
         } else {
           bounds.extend(place.geometry.location);
@@ -55,33 +64,53 @@
       map.fitBounds(bounds);
     });
 
+    var cityMarkers = {};
+    var contentCity = {};
+    var contentBody = {};
+    var contentURL = {};
+    var infoWindow = {};
+
+    google.maps.event.addListener(map, 'idle', function() {
+
+      var boundingBox = { coordinates: { west: map.getBounds().b.b, east: map.getBounds().b.f, north: map.getBounds().f.f, south: map.getBounds().f.b }};
+
+      var currentMapCenter = map.getCenter();
+
+      var coordinates = {lat: currentMapCenter.lat(), lng: currentMapCenter.lng()}
+
+      if (RAILS_PARAMS.since) coordinates.since = RAILS_PARAMS.since;
+
+      $.ajax({
+        type: 'GET',
+        url: 'http://localhost:3000/api/v1/articles',
+        data: coordinates,
+        dataType: 'json',
+        success: function (data) {
+          $.each(data, function(index, element) {
+            cityMarkers[index] = new google.maps.Marker({
+              position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
+              map: map
+            });
 
 
-    var city_markers = {};
+            google.maps.event.addListener(cityMarkers[index], 'click', function() {
+              contentCity[index] = '<h5>' + [index] + '</h5>';
+              contentBody[index] = '<p><div class="scrollFix">' + element.posts[0].thread.title + '</div></p>';
+              contentURL[index] = element.posts[0].thread.url;
 
-    <% @list_of_sorted_cities.each do |city| %>;
-        city_markers["<%= city[:name] %>"] = new google.maps.Marker({
-          position: {lat: <%= city[:latitude].to_s %>, lng: <%= city[:longitude].to_s %>},
-          map: map
-        });
-    <% end %>;
+              infoWindow[index] = new google.maps.InfoWindow({
+                content: contentCity[index] + '<br>' + contentBody[index] + '<br>' + contentURL[index]
+              });
 
-    <% @list_of_sorted_cities.each do |city| %>;
-        google.maps.event.addListener(city_markers["<%= city[:name] %>"], 'click', function() {
-        <% @results[city[:name]]["posts"].each do |article| %>;
-          // console.log("<%= article["title"] %>");
-      <% end %>;
-        });
-    <% end %>;
-
-    debugger;
-
-    google.maps.event.addListener(map, 'bounds_changed', function() {
-      console.log("West: " + map.getBounds().b.b);
-      console.log("East: " + map.getBounds().b.f);
-      console.log("North: " + map.getBounds().f.f);
-      console.log("South: " + map.getBounds().f.b);
+              cityMarkers[index].addListener('click', function() {
+                infoWindow[index].open(map, cityMarkers[index]);
+              });
+            });
+          });
+        }
+      });
     });
+
   }
 </script>
 

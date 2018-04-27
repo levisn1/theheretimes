@@ -3,7 +3,7 @@
 }
 
 html, body {
-  height: 400px;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
@@ -24,6 +24,11 @@ html, body {
 
 #map #infowindow-content {
   display: inline;
+}
+
+.scrollFix {
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .pac-card {
