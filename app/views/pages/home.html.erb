@@ -2,10 +2,10 @@
   <div class="logo">
    <%= image_tag "tht.png"%>
   </div>
-  <div class="user_section">
+  <div class="user-section">
     <% if user_signed_in? %>
     <div>
-      <p class="user_name">Mike Giuliani</p>
+      <p class="user-name">Mike Giuliani</p>
       <p>mike@test.it</p>
     </div>
 
@@ -15,15 +15,20 @@
       <% end %>
 
        <%= link_to destroy_user_session_path, method: :delete do %>
-        <i class="fa fa-sign-out iconcina-bll"></i>  <%= t(".sign_out", default: "") %>
+        <i class="fa fa-sign-out log-out-icon"></i>  <%= t(".sign_out", default: "") %>
        <% end %>
     </div>
       <% else %>
-        <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+
+
+        <%= link_to t(".sign_in", default: "Login"), new_user_session_path %>
+
+        <%= link_to t(".sign_up", default: "Sign up"),
+          new_user_registration_path %>
     <% end %>
+      </div>
   </div>
   <div>
-    <p>Category</p>
 
   </div>
 </div>
