@@ -53,9 +53,6 @@
     });
 
     var cityMarkers = {};
-    var contentCity = {};
-    var contentBody = {};
-    var contentURL = {};
     var infoWindow = {};
 
     google.maps.event.addListener(map, 'idle', function() {
@@ -81,12 +78,15 @@
 
 
             google.maps.event.addListener(cityMarkers[index], 'click', function() {
-              contentCity[index] = '<h5>' + [index] + '</h5>';
-              contentBody[index] = '<p><div class="scrollFix">' + element.posts[0].thread.title + '</div></p>';
-              contentURL[index] = element.posts[0].thread.url;
+
 
               infoWindow[index] = new google.maps.InfoWindow({
-                content: contentCity[index] + '<br>' + contentBody[index] + '<br>' + contentURL[index]
+                content: '<h5>' + [index] + '</h5>' +
+                 '<br>' + element.posts[0].thread.title + '<br>' + element.posts[0].thread.url +
+                 '<br>' + element.posts[1].thread.title + '<br>' + element.posts[1].thread.url +
+                 '<br>' + element.posts[2].thread.title + '<br>' + element.posts[2].thread.url +
+                 '<br>' + element.posts[3].thread.title + '<br>' + element.posts[3].thread.url +
+                 '<br>' + element.posts[4].thread.title + '<br>' + element.posts[4].thread.url
               });
 
               cityMarkers[index].addListener('click', function() {
