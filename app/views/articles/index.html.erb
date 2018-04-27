@@ -1,6 +1,6 @@
-<%= render 'shared/map' %>
 
 <div class="main">
+<%= render 'shared/map' %>
 
 <!--   <div class="filters">
     <%= link_to "Articles from yesterday", articles_path(since: 1) %>
@@ -9,18 +9,4 @@
     <%= link_to "Articles of the month", articles_path(since: 30) %>
   </div>
  -->
-
-  <% @list_of_sorted_cities.each do |city| %>
-  <ul>
-    <h2> <%= city[:name] %> </h2>
-    <% @results[city[:name]]["posts"].each do |article| %>
-    <li>
-      <p><%= article["thread"]["title"] %></p>
-      <p><%= link_to "Bookmark this article", bookmarks_path(:url => article["thread"]["url"], :title => article["thread"]["title"], :category => article["thread"]["site_categories"], :city => article["thread"]["city"], :lat => article["thread"]["latitude"], :lng => article["thread"]["longitude"]), :method => :post %><p>
-    </li>
-    <% end %>
-  </ul>
-  <% end %>
-</ul>
-
-
+</div>
