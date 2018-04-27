@@ -1,0 +1,43 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  background-size: cover !important;
+  background-position: center;
+  border-radius: 2px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  height: 200px;
+  margin-bottom: 5px;
+}
+
+.card-description h2 {
+  margin: auto;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+.card-description p {
+  font-size: 16px;
+  opacity: 0.7;
+  font-weight: lighter;
+}
+
+.logo-article {
+  width: 100%;
+  margin: 0;
+  height: auto;
+}
+
+.delete_button {
+  a {
+  margin-top: 5px;
+  text-align: center;
+  color: red;
+  }
+}

@@ -23,8 +23,15 @@
         <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
     <% end %>
   </div>
-  <div>
-    <p>Category</p>
 
+  <div class="filter-by-date">
+    <p class="filter-intro">Filter articles by date:</p>
+    <div class="filters">
+      <p class="date-category"><%= link_to "From yesterday", articles_path(since: 1) %></p>
+      <p class="date-category"><%= link_to "Last 3 days", articles_path(since: 3) %></p>
+      <p class="date-category"><%= link_to "Last week", articles_path(since: 7) %></p>
+      <p class="date-category"><%= link_to "Last month", articles_path(since: 30) %></p>
+    </div>
   </div>
+
 </div>

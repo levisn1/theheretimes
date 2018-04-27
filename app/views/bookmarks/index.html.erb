@@ -9,3 +9,24 @@
 
 
 
+  <div class="container">
+    <div class="row">
+      <% @bookmarks.each do |bookmark| %>
+      <div class="col-xs-4">
+        <div class="card">
+          <div class="row">
+            <div class="col-xs-3"><img src="//logo.clearbit.com/repubblica.it" class="logo-article"></div>
+            <%= raise %>
+            <div class="col-xs-9">
+              <div class="card-description">
+                <h2 class="card_label_city"><%= bookmark[:city] %></h2>
+                <p><%= link_to bookmark[:title], bookmark[:url] %></p>
+                <p class="delete_button"><%= link_to "Delete bookmark", bookmark_path(bookmark), method: :delete %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
