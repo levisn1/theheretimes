@@ -60,11 +60,10 @@
 
     google.maps.event.addListener(map, 'idle', function() {
 
-      var boundingBox = { coordinates: { west: map.getBounds().b.b, east: map.getBounds().b.f, north: map.getBounds().f.f, south: map.getBounds().f.b }};
 
       var currentMapCenter = map.getCenter();
 
-      var coordinates = {lat: currentMapCenter.lat(), lng: currentMapCenter.lng()}
+      var coordinates = {lat: currentMapCenter.lat(), lng: currentMapCenter.lng(), west: map.getBounds().b.b, east: map.getBounds().b.f, north: map.getBounds().f.f, south: map.getBounds().f.b}
 
       if (RAILS_PARAMS.since) coordinates.since = RAILS_PARAMS.since;
 

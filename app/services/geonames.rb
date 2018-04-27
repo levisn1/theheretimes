@@ -2,6 +2,11 @@ require 'net/http'
 require 'json'
 require 'pry'
 
+
+# params = {"lat"=>"45.451208056466186", "lng"=>"12.37502852304442", "west"=>"10.89187422616942", "east"=>"13.85818281991942", "north"=>"46.22045296832641", "south"=>"44.67132650333898"}
+# location_data = ReverseGeocode.new(params).call
+# list_of_sorted_cities = Geonames.new(location_data, "app/services/countries.json", "app/services/languages.json").call
+
 class Geonames
 
   GEONAMES_USERNAME = "carraragiovanni"
@@ -13,7 +18,6 @@ class Geonames
   end
 
   def call
-    self.get_language
     @list_of_sorted_cities = self.find_cities_in_the_bounding_box
   end
 
@@ -37,33 +41,39 @@ class Geonames
     end
 
     @list_of_cities.uniq!
-
-    # sorted = @list_of_cities.sort_by do |city|
-    #   city["population"]
-    # end
-    # sorted = sorted.reverse
+    @list_of_cities.reject! {|i| !i}
 
     list_of_sorted_cities = []
 
+    language = get_language
+
     @list_of_cities.each do |city|
-      list_of_sorted_cities <<
-      {
+      list_of_sorted_cities << {
         latitude: city["lat"],
         longitude: city["lng"],
         name: city["name"],
         population: city["population"],
-        language: get_language
+        language: language
       }
     end
     list_of_sorted_cities
   end
 
   def get_cities(radius, cities_count)
-    range = radius # CHANGE WHEN MAP
-    north = (@location_data["lat"] + range).to_s
-    south = (@location_data["lat"] - range).to_s
-    east = (@location_data["lng"] + range).to_s
-    west = (@location_data["lng"] - range).to_s
+
+    if @location_data["west"]
+      north = @location_data["north"].to_s
+      south = @location_data["south"].to_s
+      east = @location_data["east"].to_s
+      west = @location_data["west"].to_s
+    else
+      range = radius
+      north = (@location_data["lat"] + range).to_s
+      south = (@location_data["lat"] - range).to_s
+      east = (@location_data["lng"] + range).to_s
+      west = (@location_data["lng"] - range).to_s
+    end
+
 
     geonames = URI("http://api.geonames.org/citiesJSON?"\
       + "north=" + north\
