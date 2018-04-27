@@ -1,10 +1,11 @@
-<div class="main">
-  <% @bookmarks.each do |bookmark| %>
-  <p><%= bookmark[:city] %></p>
-  <p><%= link_to bookmark[:title], bookmark[:url] %></p>
-  <p><%= link_to "Delete bookmark", bookmark_path(bookmark), method: :delete %></p>
-  <br>
-  <% end %>
+<div class="bule-bar">
+  <div>
+    <div class="logo-book">
+      <%= image_tag "tht.png"%>
+    </div>
+  </div>
 </div>
+
+
 
 

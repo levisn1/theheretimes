@@ -25,25 +25,33 @@
 
 .logo {
   height: 250px;
-  border-bottom: 1px solid white
+  // border-bottom: 1px solid white;
+  margin-left: 50px;
   // margin-left:auto;
   // margin-right:auto;
   // margin: 0 auto;
 }
 
-img {
-  margin-left: 50px;
-}
+// img {
+//   margin-left: 50px;
+// }
 
-.user_section {
+.user-section {
   height: 100px;
+  border-top: 1px solid white;
   border-bottom: 1px solid white;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  > a:first-child {
+    margin-left: 95px;
+  }
+  > a:last-child {
+    margin-right: 95px;
+  }
 }
 
-.user_name {
+.user-name {
 font-family: Roboto;
 font-size: 25px;
 color: #F5F5F5;
@@ -54,9 +62,10 @@ p {
   margin: 2px 15px -10.5px;
 }
 
-.iconcina-bll {
+.log-out-icon {
   font-size: 30px;
   color: white;
+  margin-right: 15px;
 }
 
 .second-section {
@@ -64,3 +73,21 @@ p {
   align-items: center;
   justify-content: space-between;
 }
+
+.home-userj {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-log {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.bookmark-home {
+  margin-right: 15px;
+
+}
+
