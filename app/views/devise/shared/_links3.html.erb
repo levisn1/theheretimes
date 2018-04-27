@@ -1,0 +1,9 @@
+<%- if controller_name != 'sessions' %>
+  <%= link_to "Do you already have an account?", new_session_path(resource_name), :class => "container_linkdevise_me_2" %><br />
+<% end -%>
+
+<%- if devise_mapping.omniauthable? %>
+  <%- resource_class.omniauth_providers.each do |provider| %>
+    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
+  <% end -%>
+<% end -%>

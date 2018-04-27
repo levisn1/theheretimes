@@ -1,0 +1,77 @@
+.wrapper_form_login {
+  text-align: center;
+  margin: auto;
+  background-color: white;
+  padding: 50px;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.text_label_login {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 5%;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+}
+
+.wrapper_email_login {
+text-align: center;
+font-weight: lighter;
+letter-spacing: 2px;
+}
+
+.label_email_login {
+font-weight: lighter;
+}
+
+.wrapper_password_login {
+text-align: center;
+letter-spacing: 2px;
+}
+
+.label_password_login {
+font-weight: lighter;
+}
+
+.label_remember_me {
+text-align: center;
+font-size: 11px;
+vertical-align: 3px;
+font-weight: lighter;
+}
+
+.container_linkdevise_me {
+font-size: 11px;
+vertical-align: 3px;
+color: #333333;
+font-weight: lighter;
+margin-right: -30px;
+}
+
+.container_linkdevise_me_2 {
+margin: auto;
+font-size: 12px;
+// vertical-align: 3px;
+color: #333333;
+font-weight: lighter;
+}
+
+.button_form_login {
+font-weight: lighter;
+width: 100%;
+background-color: #0A2342;
+color: white !important;
+letter-spacing: 2px;
+}
+
+.banner {
+height: 100vh;
+background-size: cover !important;
+display: flex;
+}
+
+.user_remember_me {
+text-align: left;
+}
