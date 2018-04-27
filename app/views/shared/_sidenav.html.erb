@@ -1,29 +1,32 @@
-
 <div class="sidenav">
   <div class="logo">
    <%= image_tag "tht.png"%>
   </div>
-  <div class="user_section">
+  <div class="user-section">
     <% if user_signed_in? %>
-    <div>
-      <p class="user_name">Mike Giuliani</p>
+    <div class="user-info">
+      <p class="user-name">Mike Giuliani</p>
       <p>mike@test.it</p>
     </div>
 
     <div class="second-section">
       <%= link_to bookmarks_path, class: "bookmark-home" do %>
-        <%= image_tag "book.svg", height: 40 %>
+        <%= image_tag "book.svg", height: 30 %>
       <% end %>
 
        <%= link_to destroy_user_session_path, method: :delete do %>
-        <i class="fa fa-sign-out iconcina-bll"></i>  <%= t(".sign_out", default: "") %>
+        <i class="fa fa-sign-out log-out-icon"></i>  <%= t(".sign_out", default: "") %>
        <% end %>
     </div>
       <% else %>
-        <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
-    <% end %>
-  </div>
 
+
+        <%= link_to t(".sign_in", default: "Login"), new_user_session_path %>
+
+        <%= link_to t(".sign_up", default: "Sign up"),
+          new_user_registration_path %>
+    <% end %>
+      </div>
   <div class="filter-by-date">
     <p class="filter-intro">Filter articles by date:</p>
     <div class="filters">
@@ -33,5 +36,7 @@
       <p class="date-category"><%= link_to "Last month", articles_path(since: 30) %></p>
     </div>
   </div>
+  </div>
+
 
 </div>
