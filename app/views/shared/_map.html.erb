@@ -37,7 +37,6 @@
 
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    var markers = [];
 
 
 
@@ -96,11 +95,11 @@
 
             google.maps.event.addListener(cityMarkers[index], 'click', function() {
               contentCity[index] = '<h5>' + [index] + '</h5>';
-              contentBody[index] = '<p>' + element.posts[0].thread.title + '</p>';
-              // contentURL[index] = element.posts[0].thread.url;
+              contentBody[index] = '<p><div class="scrollFix">' + element.posts[0].thread.title + '</div></p>';
+              contentURL[index] = element.posts[0].thread.url;
 
               infoWindow[index] = new google.maps.InfoWindow({
-                content: contentCity[index] + '<br>' + contentBody[index]
+                content: contentCity[index] + '<br>' + contentBody[index] + '<br>' + contentURL[index]
               });
 
               cityMarkers[index].addListener('click', function() {
