@@ -65,7 +65,11 @@
       map.fitBounds(bounds);
     });
 
-    var citymarkers = {};
+    var cityMarkers = {};
+    var contentCity = {};
+    var contentBody = {};
+    var contentURL = {};
+    var infoWindow = {};
 
     google.maps.event.addListener(map, 'idle', function() {
 
@@ -84,24 +88,23 @@
         dataType: 'json',
         success: function (data) {
           $.each(data, function(index, element) {
-            citymarkers[index] = new google.maps.Marker({
+            cityMarkers[index] = new google.maps.Marker({
               position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
               map: map
             });
 
-            var contentString = {};
-            var infowindow = {};
 
-            google.maps.event.addListener(citymarkers[index], 'click', function() {
-              contentString[index] = element.posts[0].thread.title;
+            google.maps.event.addListener(cityMarkers[index], 'click', function() {
+              contentCity[index] = '<h5>' + [index] + '</h5>';
+              contentBody[index] = '<p>' + element.posts[0].thread.title + '</p>';
+              // contentURL[index] = element.posts[0].thread.url;
 
-              infowindow[index] = new google.maps.InfoWindow({
-                content: contentString[index],
-                maxWidth: 200
+              infoWindow[index] = new google.maps.InfoWindow({
+                content: contentCity[index] + '<br>' + contentBody[index]
               });
 
-              citymarkers[index].addListener('click', function() {
-                infowindow[index].open(map, citymarkers[index]);
+              cityMarkers[index].addListener('click', function() {
+                infoWindow[index].open(map, cityMarkers[index]);
               });
             });
           });
