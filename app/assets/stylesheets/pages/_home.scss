@@ -1,7 +1,7 @@
 // Specific CSS for your home-page
 .sidenav {
     height: 100%;
-    width: 357px;
+    width: 25%;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -35,8 +35,7 @@
 
 /* Style page content */
 .main {
-    margin-left: 357px;
-    padding: 0px 10px;
+    margin-left: 25%;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
@@ -47,15 +46,13 @@
 
 .logo {
   height: 250px;
-  border-bottom: 1px solid white
+  border-bottom: 1px solid white;
   // margin-left:auto;
   // margin-right:auto;
   // margin: 0 auto;
-}
-
-img {
   margin-left: 50px;
 }
+
 
 .user_section {
   height: 100px;
@@ -72,9 +69,6 @@ color: #F5F5F5;
 
 }
 
-p {
-  margin: 2px 15px -10.5px;
-}
 
 .iconcina-bll {
   font-size: 30px;
