@@ -8,10 +8,3 @@ class ArticlesController < ApplicationController
     @results = api[:articles]
   end
 end
-
-
-
-
-
-
-
