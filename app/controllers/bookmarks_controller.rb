@@ -37,7 +37,7 @@ class BookmarksController < ApplicationController
   private
 
   def bookmarks_params
-    params.permit(:user_id, :url, :city, :title, :category, :lat, :lng)
+    params.permit(:user_id, :url, :city, :title, :category, :source, :lat, :lng)
   end
 
 end
