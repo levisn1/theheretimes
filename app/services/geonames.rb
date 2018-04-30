@@ -32,7 +32,7 @@ class Geonames
   end
 
   def find_cities_in_the_bounding_box
-    @list_of_cities = get_cities(1, 5)
+    @list_of_cities = get_cities(1, 3)
 
     if @list_of_cities.any? { |city| city["name"].strip.downcase == @location_data["name"].strip.downcase }
       "Ok"
