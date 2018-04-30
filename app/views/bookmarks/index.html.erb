@@ -1,51 +1,50 @@
 <div class="navbar-wagon navbar-fixed-top">
-  <!-- Logo -->
   <a href="/" class="navbar-wagon-brand">
     <%= image_tag "whitepin.png"%>
   </a>
 </div>
-
 <div class="bule-bar">
   <div>
     <div class="logo-book">
       <a href="/">
-      <%= image_tag "tht.png"%>
+        <%= image_tag "tht.png"%>
       </a>
     </div>
   </div>
 </div>
 
 
-
-  <div class="container-fluid bannerbookmark">
-    <div class="container-bookmarks">
-      <div class="container" style="height: 150vh;">
-        <div class="row">
-          <div class="cards-container">
-            <% @bookmarks.each do |bookmark| %>
-            <div class="col-xs-4">
-              <div class="card-bookmark">
+<div class="container-fluid bannerbookmark">
+  <div class="container-bookmarks">
+    <div class="row">
+      <div class="cards-container">
+        <% @bookmarks.each do |bookmark| %>
+        <div class="col-xs-12 rowalignment1">
+          <div class="card-bookmark">
+            <div class="row">
+              <div class="col-xs-3">
                 <div class="row">
-                  <div class="col-xs-3">
+                  <div class="col-xs-12 rowalignment2">
                     <%= link_to "", bookmark_path(bookmark), method: :delete, class:"fa fa-times" %>
-                    <img src="//logo.clearbit.com/repubblica.it" class="logo-article">
                   </div>
-                  <div class="col-xs-9">
-                    <div class="card-description">
-                      <h2 class="card_label_city"><%= bookmark[:city] %></h2>
-                      <p><%= link_to bookmark[:title], bookmark[:url] %></p>
-                    </div>
-                    <div class= "cards-bookmark-footer">
-                      <div class= "cards-bookmark-controls">
-                      </div>
-                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-12 rowalignment3">
+                    <img src="//logo.clearbit.com/<%= bookmark[:source] %>">
                   </div>
                 </div>
               </div>
+              <div class="col-xs-9">
+                <div class="card-description">
+                  <h2><%= link_to bookmark[:title], bookmark[:url] %></h2>
+                  <p class="card_label_city"><%= bookmark[:city] %></p>
+                </div>
+              </div>
             </div>
-            <% end %>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>
