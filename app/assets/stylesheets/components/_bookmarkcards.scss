@@ -1,17 +1,27 @@
-.main {
-  display: flex;
-  justify-content: space-between;
+.container-bookmarks {
+  display: block;
 }
 
-.card {
-  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+.logo-book {
+  max-width: 100%;
+  height: 90px;
+  margin: auto;
+}
+
+.cards-container {
+  margin-top: 15px;
+}
+
+.card-bookmark {
   background-size: cover !important;
   background-position: center;
-  border-radius: 2px;
-  box-shadow: 0 0 3px rgba(0,0,0,0.3);
+  height: 165px;
+  margin-bottom: 25px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
   transition: all 0.3s ease;
-  height: 200px;
-  margin-bottom: 5px;
+  background-color: white;
+  position: relative;
 }
 
 .card-description h2 {
@@ -28,10 +38,35 @@
   font-weight: lighter;
 }
 
+.card-description a {
+  color: #132543;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+
+.cards-bookmark-footer {
+}
+
+.cards-controls {
+position: absolute;
+}
+
+a.fa {
+  display: inline-block;
+  padding: 5px;
+}
+
+a.fa:hover {
+  text-decoration: none;
+}
+
 .logo-article {
-  width: 100%;
-  margin: 0;
-  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  padding-top: 30px;
 }
 
 .delete_button {
