@@ -325,7 +325,7 @@ google.maps.event.addListener(map, 'idle', function() {
 
   $.ajax({
     type: 'GET',
-    url: 'http://localhost:3000/api/v1/articles',
+    url: '/api/v1/articles',
     data: coordinates,
     dataType: 'json',
     beforeSend: function(){
