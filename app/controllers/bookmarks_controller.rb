@@ -14,7 +14,7 @@ class BookmarksController < ApplicationController
   def create
     @bookmark = current_user.bookmarks.new(bookmarks_params)
     if @bookmark.save
-      redirect_to bookmarks_path
+      redirect_to articles_path
     end
   end
 
