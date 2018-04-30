@@ -14,7 +14,7 @@ class BookmarksController < ApplicationController
   def create
     @bookmark = current_user.bookmarks.new(bookmarks_params)
     if @bookmark.save
-      redirect_to bookmarks_path
+      redirect_to articles_path
     end
   end
 
@@ -37,7 +37,7 @@ class BookmarksController < ApplicationController
   private
 
   def bookmarks_params
-    params.permit(:user_id, :url, :city, :title, :category, :lat, :lng)
+    params.permit(:user_id, :url, :city, :title, :category, :source, :lat, :lng)
   end
 
 end
