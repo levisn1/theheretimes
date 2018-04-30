@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :articles, only: [ :index, :edit, :update ]
 
   devise_for :users
-  root to: 'pages#home'
+  root to: 'articles#index'
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do

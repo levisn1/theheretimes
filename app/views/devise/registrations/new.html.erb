@@ -6,6 +6,8 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
+      <%= f.input :first_name, required: true, autofocus: true, wrapper_html: { class: "wrapper_email_login" }, label_html: { class: 'label_email_login' } %>
+      <%= f.input :last_name, required: true, autofocus: true, wrapper_html: { class: "wrapper_email_login" }, label_html: { class: 'label_email_login' } %>
       <%= f.input :email, required: true, autofocus: true, wrapper_html: { class: "wrapper_email_login" }, label_html: { class: 'label_email_login' } %>
       <%= f.input :password, required: true, wrapper_html: { class: "wrapper_password_login" }, label_html: { class: 'label_email_login' }, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
       <%= f.input :password_confirmation, required: true, wrapper_html: { class: "wrapper_password_login" }, label_html: { class: 'label_email_login' }  %>

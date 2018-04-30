@@ -5,6 +5,7 @@
   <div class="user-section">
     <% if user_signed_in? %>
       <div class="user-info">
+        <p class="user-name"><%= current_user[:first_name] %><%= current_user[:last_name] %></p>
         <p class="user-name"><%= current_user[:email] %></p>
       </div>
 
