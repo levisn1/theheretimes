@@ -1,7 +1,16 @@
+<div class="navbar-wagon navbar-fixed-top">
+  <!-- Logo -->
+  <a href="/" class="navbar-wagon-brand">
+    <%= image_tag "whitepin.png"%>
+  </a>
+</div>
+
 <div class="bule-bar">
   <div>
     <div class="logo-book">
+      <a href="/">
       <%= image_tag "tht.png"%>
+      </a>
     </div>
   </div>
 </div>
@@ -9,7 +18,7 @@
 
 
 
-  <div class="container">
+  <div class="container" style="height: 150vh;">
     <div class="row">
       <% @bookmarks.each do |bookmark| %>
       <div class="col-xs-4">
