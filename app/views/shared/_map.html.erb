@@ -11,9 +11,11 @@
 
 
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+
 <div class="loader" id="loader">
   <span>{</span><span>}</span>
 </div>
+
 <div id="map">
 </div>
 <script>
@@ -336,26 +338,28 @@ google.maps.event.addListener(map, 'idle', function() {
       $.each(data, function(index, element) {
         cityMarkers[index] = new google.maps.Marker({
           position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
-          map: map
+          map: map,
+          animation: google.maps.Animation.DROP
         });
 
             var line = function(post) {
-              return '<img src="//logo.clearbit.com/' + post.thread.site_full + '?size=40"> ' + '<a href="' + post.thread.url + '"" target="_parent">' + post.thread.title + '</a> <a href="/bookmarks?url='+post.thread.url+'&title='+post.thread.title+'&category='+post.thread.site_categories+'&city='+post.thread.city+'&source='+post.thread.site_full+'&lat='+post.thread.lat+'&lng='+post.thread.lng+'&method=post" data-method="post"><i class="far fa-bookmark"></i></a>';
+              return  '<div class="row info_window"> <img class="logo_info col-xs-2" src="//logo.clearbit.com/' + post.thread.site_full + '?size=40" onerror="this.src=\'https://image.flaticon.com/icons/svg/448/448589.svg\'">' +
+               '<a href="' + post.thread.url + '"" target="_parent" class="col-xs-8">' + post.thread.title + '</a> <a href="/bookmarks?url='+post.thread.url + '&title=' + post.thread.title + '&category=' + post.thread.site_categories + '&city=' + post.thread.city + '&source=' + post.thread.site_full + '&lat=' + post.thread.lat + '&lng=' + post.thread.lng + '&method=post" data-method="post"><i class="far fa-bookmark col-xs-2"></i></a> </div>';
             }
 
             google.maps.event.addListener(cityMarkers[index], 'click', function() {
               infoWindow[index] = new google.maps.InfoWindow({
-                content: '<h5>' + [index] + '</h5>' +
-                 '<br>' + line(element.posts[0]) + '<br>' +
-                 '<br>' + line(element.posts[1]) + '<br>' +
-                 '<br>' + line(element.posts[2]) + '<br>' +
-                 '<br>' + line(element.posts[3]) + '<br>' +
-                 '<br>' + line(element.posts[4]) + '<br>'
-              });
+                maxWidth: 400,
+                content:
+                '<h2>' + [index] + '</h2>' +
+                '<hr>' +
+                '<br>' + line(element.posts[0]) +
+                '<br>' + line(element.posts[1]) +
+                '<br>' + line(element.posts[2])
+                });
+              infoWindow[index].open(map, cityMarkers[index]);
 
-          cityMarkers[index].addListener('click', function() {
-            infoWindow[index].open(map, cityMarkers[index]);
-          });
+
         });
       });
     }
