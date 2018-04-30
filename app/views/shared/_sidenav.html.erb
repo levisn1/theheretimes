@@ -5,7 +5,7 @@
   <div class="user-section">
     <% if user_signed_in? %>
       <div class="user-info">
-        <p class="user-name"><%= current_user[:first_name] %><%= current_user[:last_name] %></p>
+        <p class="user-name"><%= current_user[:first_name].capitalize %> <%= current_user[:last_name].capitalize %></p>
         <p class="user-name"><%= current_user[:email] %></p>
       </div>
 
@@ -26,10 +26,13 @@
   <div class="filter-by-date">
     <p class="filter-intro">Filter articles by date:</p>
     <div class="filters">
-      <p class="date-category"><%= link_to "From yesterday", articles_path(since: 1) %></p>
-      <p class="date-category"><%= link_to "Last 3 days", articles_path(since: 3) %></p>
-      <p class="date-category"><%= link_to "Last week", articles_path(since: 7) %></p>
-      <p class="date-category"><%= link_to "Last month", articles_path(since: 30) %></p>
+      <p class="date-category <%= filter_active?(1) %>"><%= link_to "From yesterday", articles_path(since: 1) %></p>
+      <p class="date-category <%= filter_active?(3) %>"><%= link_to "Last 3 days", articles_path(since: 3) %></p>
+      <p class="date-category <%= filter_active?(7) %>"><%= link_to "Last week", articles_path(since: 7) %></p>
+      <p class="date-category <%= filter_active?(30) %>"><%= link_to "Last month", articles_path(since: 30) %></p>
+      <% if params[:since] %>
+        <p class="date-category"><em><%= link_to "Apply default settings", articles_path %></em></p>
+      <% end %>
     </div>
   </div>
 </div>

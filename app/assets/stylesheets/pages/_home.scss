@@ -29,8 +29,16 @@
   .filters .date-category a:hover {
     font-weight: bolder;
   }
-}
 
+  .active-font a {
+    font-weight: bold;
+  }
+
+  .active-font a:link {
+    text-decoration: underline;
+    text-decoration-color: white;
+  }
+}
 
 /* Style page content */
 .main {
