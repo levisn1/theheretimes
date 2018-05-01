@@ -336,32 +336,64 @@ google.maps.event.addListener(map, 'idle', function() {
     },
     success: function (data) {
       $.each(data, function(index, element) {
+        if (element.posts.length === 0) {
+          return true;
+        }
+
         cityMarkers[index] = new google.maps.Marker({
           position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
           map: map,
           animation: google.maps.Animation.DROP
         });
 
-            var line = function(post) {
-              return  '<div class="row info_window"> <img class="logo_info col-xs-2" src="//logo.clearbit.com/' + post.thread.site_full + '?size=40" onerror="this.src=\'https://image.flaticon.com/icons/svg/448/448589.svg\'">' +
-               '<a href="' + post.thread.url + '"" target="_parent" class="col-xs-8">' + post.thread.title + '</a> <a href="/bookmarks?url='+post.thread.url + '&title=' + post.thread.title + '&category=' + post.thread.site_categories + '&city=' + post.thread.city + '&source=' + post.thread.site_full + '&lat=' + post.thread.lat + '&lng=' + post.thread.lng + '&method=post" data-method="post"><i class="far fa-bookmark col-xs-2"></i></a> </div>';
+        var line = function(post) {
+          return  '<div class="row info_window-item"> <img class="logo_info col-xs-2" src="//logo.clearbit.com/' + post.thread.site_full + '?size=40" onerror="this.src=\'https://image.flaticon.com/icons/svg/448/448589.svg\'">' +
+          '<a href="' + post.thread.url + '"" target="_parent" class="col-xs-8">' + post.thread.title + '</a> <a href="/bookmarks?url='+post.thread.url + '&title=' + post.thread.title + '&category=' + post.thread.site_categories + '&city=' + post.thread.city + '&source=' + post.thread.site_full + '&lat=' + post.thread.lat + '&lng=' + post.thread.lng + '&method=post" data-method="post" remote="true"><i class="far fa-bookmark col-xs-2"></i></a> </div>';
+        };
+
+            // var contentHtml = function(city, posts) {
+            //   var html = [];
+
+            //   html.push("<h2 class='titolo'>"+city+"</h2>");
+
+            //   posts.forEach(function(post) {
+            //     html.push("<br>");
+            //     html.push(line(post));
+            //   });
+
+            //   return html.join("");
+            // }
+
+
+            var contentHtml = function(city, posts) {
+              var html = [];
+
+              html.push('<div class="iw-title">'+'<h2>'+city+'</h2>'+'</div>');
+
+              html.push("<div class='iw-content'>")
+
+              posts.forEach(function(post) {
+                html.push("<br>");
+                html.push(line(post));
+              });
+
+              html.push("</div>")
+
+              return html.join("");
             }
+
 
             google.maps.event.addListener(cityMarkers[index], 'click', function() {
               infoWindow[index] = new google.maps.InfoWindow({
-                maxWidth: 400,
-                content:
-                '<h2>' + [index] + '</h2>' +
-                '<hr>' +
-                '<br>' + line(element.posts[0]) +
-                '<br>' + line(element.posts[1]) +
-                '<br>' + line(element.posts[2])
-                });
+                maxWidth: 350,
+                content: contentHtml(index, element.posts)
+              });
               infoWindow[index].open(map, cityMarkers[index]);
 
+            });
 
-        });
-      });
+
+          });
     }
   });
 });
