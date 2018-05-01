@@ -21,16 +21,27 @@
   }
   .filters .date-category {
     padding: 10px 0px;
+    font-size: 20px;
+    font-weight: lighter;
   }
   .filters .date-category a {
     color: white;
     text-decoration: none;
   }
   .filters .date-category a:hover {
-    font-weight: bolder;
+    text-decoration: underline;
+    text-decoration-color: white;
+  }
+
+  .active-font a {
+    font-weight: bold;
+  }
+
+  .active-font a:link {
+    text-decoration: underline;
+    text-decoration-color: white;
   }
 }
-
 
 /* Style page content */
 .main {
@@ -66,9 +77,15 @@
   justify-content: space-between;
   > a:first-child {
     margin-left: 95px;
+    font-family: Roboto;
+    font-size: 18px;
+    color: #F5F5F5;
   }
   > a:last-child {
     margin-right: 95px;
+    font-family: Roboto;
+    font-size: 18px;
+    color: #F5F5F5;
   }
 }
 

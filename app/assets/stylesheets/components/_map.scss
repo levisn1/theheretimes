@@ -55,19 +55,19 @@ html, body {
 }
 
 #pac-input {
-border: 1px solid transparent;
-border-radius: 2px;
-box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
-box-sizing: border-box;
-font-family: Roboto;
-font-size: 15px;
-font-weight: 300;
-height: 29px;
-margin-right: 10px;
-margin-top: 10px;
-padding: 0 11px 0 13px;
-text-overflow: ellipsis;
-width: 300px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px;
+  box-sizing: border-box;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  height: 29px;
+  margin-right: 10px;
+  margin-top: 10px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
 }
 
 #pac-input:focus {
@@ -83,4 +83,54 @@ width: 300px;
 }
 #target {
   width: 345px;
+}
+
+.info_window-item {
+  margin-right: 0px;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  // margin-bottom: 15px;
+}
+
+// .gm-style-iw {
+//   max-height: 300px;
+// }
+
+
+.gm-style-iw {
+  position: absolute;
+  width: 100% !important;
+  top: 0 !important;
+  left: 0 !important;
+  background-color: #fff;
+  border-radius: 2px 2px 0 0;
+}
+
+.iw-title {
+  background-color: $blue;
+  color: white;
+  padding: 10px;
+  border-radius: 2px 2px 0 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  h2 {
+    margin: 0px;
+    font-size: 21px;
+  }
+}
+
+.iw-content {
+  max-height: 350px;
+  max-width: 400px;
+  padding-top: 50px;
+  overflow: auto;
+
+}
+
+.logo_info {
+  border-radius: 50%;
+  // width: 50px;
 }
