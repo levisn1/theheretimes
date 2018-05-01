@@ -11,10 +11,21 @@ class BookmarksController < ApplicationController
   #   authorize @bookmark
   # end
 
+  # def create
+  #   @bookmark = current_user.bookmarks.new(bookmarks_params)
+  #   if @bookmark.save
+  #     redirect_to bookmarks_path
+  #   end
+  # end
+
+
   def create
     @bookmark = current_user.bookmarks.new(bookmarks_params)
     if @bookmark.save
-      redirect_to articles_path
+      respond_to do |format|
+      format.html { redirect_to articles_path }
+      format.js {}
+      end
     end
   end
 
@@ -22,15 +33,6 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.find(params[:id])
     @bookmark.destroy
     redirect_to bookmarks_path
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def show
   end
 
 

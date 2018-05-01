@@ -5,7 +5,7 @@
   <div class="user-section">
     <% if user_signed_in? %>
       <div class="user-info">
-        <p class="user-name"><%= current_user[:first_name].capitalize %> <%= current_user[:last_name].capitalize %></p>
+        <p class="user-name"><%= current_user[:first_name] %> <%= current_user[:last_name] %></p>
         <p class="user-name"><%= current_user[:email] %></p>
       </div>
 
@@ -31,7 +31,7 @@
       <p class="date-category <%= filter_active?(7) %>"><%= link_to "Last week", articles_path(since: 7) %></p>
       <p class="date-category <%= filter_active?(30) %>"><%= link_to "Last month", articles_path(since: 30) %></p>
       <% if params[:since] %>
-        <p class="date-category"><em><%= link_to "Apply default settings", articles_path %></em></p>
+        <p class="date-category"><em><i class="fas fa-undo"></i> <%= link_to "Apply default settings", articles_path %></em></p>
       <% end %>
     </div>
   </div>
