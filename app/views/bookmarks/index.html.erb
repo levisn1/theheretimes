@@ -14,36 +14,38 @@
 </div>
 
 
-<div class="container-fluid bannerbookmark">
-  <div class="container-bookmarks">
-    <div class="row">
-      <div class="cards-container">
-        <% @bookmarks.each do |bookmark| %>
-        <div class="col-xs-12 rowalignment1">
-          <div class="card-bookmark">
-            <div class="row">
-              <div class="col-xs-3">
-                <div class="row">
-                  <div class="col-xs-12 rowalignment2">
-                    <%= link_to "", bookmark_path(bookmark), method: :delete, class:"fa fa-times" %>
+<div class="container">
+  <div class="container-fluid">
+    <div class="container-bookmarks">
+      <div class="row">
+        <div class="cards-container">
+          <% @bookmarks.each do |bookmark| %>
+          <div class="col-xs-12 rowalignment1">
+            <div class="card-bookmark">
+              <div class="row">
+                <div class="col-xs-3">
+                  <div class="row">
+                    <div class="col-xs-12 rowalignment2">
+                      <%= link_to "", bookmark_path(bookmark), method: :delete, class:"fa fa-times" %>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12 rowalignment3">
+                      <img src="//logo.clearbit.com/<%= bookmark[:source] %>">
+                    </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-xs-12 rowalignment3">
-                    <img src="//logo.clearbit.com/<%= bookmark[:source] %>">
+                <div class="col-xs-9">
+                  <div class="card-description">
+                    <p class="card_label_city"><%= bookmark[:city] %></p>
+                    <h2><%= link_to bookmark[:title], bookmark[:url], target: '_blank' %></h2>
                   </div>
-                </div>
-              </div>
-              <div class="col-xs-9">
-                <div class="card-description">
-                  <h2><%= link_to bookmark[:title], bookmark[:url] %></h2>
-                  <p class="card_label_city"><%= bookmark[:city] %></p>
                 </div>
               </div>
             </div>
           </div>
+          <% end %>
         </div>
-        <% end %>
       </div>
     </div>
   </div>

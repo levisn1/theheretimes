@@ -40,6 +40,7 @@
   transition: all 0.3s ease;
   background-color: white;
   width: 700px;
+  height: 130px;
   padding: 20px;
   img {
   width: 80px;
@@ -47,18 +48,11 @@
 }
 }
 
-.card-description h2 {
-  margin: auto;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  margin-top: 5%;
-  margin-bottom: 2%;
-}
 .card-description p {
   font-size: 16px;
   opacity: 0.7;
   font-weight: lighter;
+  text-align: left;
 }
 
 .card-description a {
@@ -68,11 +62,14 @@
   font-variant: normal;
   font-weight: 500;
   letter-spacing: normal;
-  line-height: 24px;
+  line-height: 20px;
   color: black;
   transition: color .2s ease-in-out;
+  display: flex;
+  position: absolute;
+  top: 35px;
 }
-  a:hover {
+a:hover {
   text-decoration: underline solid rgb(0, 0, 0);
   color: #132543;
 }
@@ -94,4 +91,15 @@ a.fa:hover {
   text-align: center;
   color: red;
   }
+}
+
+.bookmarkstitle {
+  font-family: Elsie;
+  font-size: 50px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  letter-spacing: normal;
+  color: black;
+  text-align: center;
 }
