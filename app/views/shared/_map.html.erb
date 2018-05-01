@@ -27,11 +27,15 @@
 
 
 
+
     var center = {lat: <%= center[:lat].to_s %>, lng: <%= center[:lng].to_s %>};
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: center,
+      mapTypeControl: false,
+      streetViewControl: false,
+
       styles: [
       {
         "elementType": "geometry",
@@ -314,6 +318,7 @@ searchBox.addListener('places_changed', function() {
 
 var cityMarkers = {};
 var infoWindow = {};
+
 
 google.maps.event.addListener(map, 'idle', function() {
 
