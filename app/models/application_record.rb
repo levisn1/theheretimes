@@ -5,7 +5,7 @@ class ApplicationRecord < ActiveRecord::Base
     if params[:lat] && params[:lng]
       location_data = ReverseGeocode.new(params).call
     else
-      city_name = "Milan"
+      city_name = "Philadelphia"
       location_data = Geocode.new(city_name).call
     end
 

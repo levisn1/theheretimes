@@ -27,11 +27,15 @@
 
 
 
+
     var center = {lat: <%= center[:lat].to_s %>, lng: <%= center[:lng].to_s %>};
 
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: center,
+      mapTypeControl: false,
+      streetViewControl: false,
+
       styles: [
       {
         "elementType": "geometry",
@@ -315,6 +319,7 @@ searchBox.addListener('places_changed', function() {
 var cityMarkers = {};
 var infoWindow = {};
 
+
 google.maps.event.addListener(map, 'idle', function() {
 
   var currentMapCenter = map.getCenter();
@@ -338,8 +343,7 @@ google.maps.event.addListener(map, 'idle', function() {
       $.each(data, function(index, element) {
         cityMarkers[index] = new google.maps.Marker({
           position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
-          map: map,
-          animation: google.maps.Animation.DROP
+          map: map
         });
 
             var line = function(post) {
