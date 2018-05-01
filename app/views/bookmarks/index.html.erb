@@ -13,7 +13,6 @@
   </div>
 </div>
 
-
 <div class="container">
   <div class="container-fluid">
     <div class="container-bookmarks">
@@ -37,7 +36,7 @@
                 </div>
                 <div class="col-xs-9">
                   <div class="card-description">
-                    <p class="card_label_city"><%= bookmark[:city] %></p>
+                    <p class="card_label_city"> <%= bookmark[:city] + "," %> <% str = bookmark[:published] %><% date = Date.parse str %><%= date.strftime('%d %b %Y') %> </p>
                     <h2><%= link_to bookmark[:title], bookmark[:url], target: '_blank' %></h2>
                   </div>
                 </div>

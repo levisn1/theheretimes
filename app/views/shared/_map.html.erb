@@ -340,7 +340,7 @@ google.maps.event.addListener(map, 'idle', function() {
         });
 
             var line = function(post) {
-              return '<img src="//logo.clearbit.com/' + post.thread.site_full + '?size=40"> ' + '<a href="' + post.thread.url + '"" target="_parent">' + post.thread.title + '</a> <a href="/bookmarks?url='+post.thread.url+'&title='+post.thread.title+'&category='+post.thread.site_categories+'&city='+post.thread.city+'&source='+post.thread.site_full+'&lat='+post.thread.lat+'&lng='+post.thread.lng+'&method=post" data-method="post"><i class="far fa-bookmark"></i></a>';
+              return '<img src="//logo.clearbit.com/' + post.thread.site_full + '?size=40"> ' + '<a href="' + post.thread.url + '"" target="_parent">' + post.thread.title + '</a> <a href="/bookmarks?url='+post.thread.url+'&title='+post.thread.title+'&category='+post.thread.site_categories+'&city='+post.thread.city+'&source='+post.thread.site_full+'&published='+post.thread.published+'&lat='+post.thread.lat+'&lng='+post.thread.lng+'&method=post" data-method="post"><i class="far fa-bookmark"></i></a>';
             }
 
             google.maps.event.addListener(cityMarkers[index], 'click', function() {
