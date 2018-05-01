@@ -338,8 +338,7 @@ google.maps.event.addListener(map, 'idle', function() {
       $.each(data, function(index, element) {
         cityMarkers[index] = new google.maps.Marker({
           position: { lat: element.posts[0].thread.latitude, lng: element.posts[0].thread.longitude },
-          map: map,
-          animation: google.maps.Animation.DROP
+          map: map
         });
 
             var line = function(post) {
