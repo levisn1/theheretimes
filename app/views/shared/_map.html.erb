@@ -352,21 +352,8 @@ google.maps.event.addListener(map, 'idle', function() {
 
         var line = function(post) {
           return  '<div class="row info_window-item"> <img class="logo_info col-xs-2" src="//logo.clearbit.com/' + post.thread.site_full + '?size=40" onerror="this.src=\'https://image.flaticon.com/icons/svg/448/448589.svg\'">' +
-          '<a href="' + post.thread.url + '"" target="_parent" class="col-xs-8">' + post.thread.title + '</a> <a href="/bookmarks?url='+post.thread.url + '&title=' + post.thread.title + '&category=' + post.thread.site_categories + '&city=' + post.thread.city + '&source=' + post.thread.site_full + '&lat=' + post.thread.lat + '&lng=' + post.thread.lng + '&method=post" data-method="post" remote="true"><i class="far fa-bookmark col-xs-2"></i></a> </div>';
+          '<a href="' + post.thread.url + '"" target="_parent" class="col-xs-8">' + post.thread.title + '</a> <a href="/bookmarks?url='+post.thread.url + '&title=' + post.thread.title + '&category=' + post.thread.site_categories + '&city=' + post.thread.city + '&source=' + post.thread.site_full + '&published=' + post.thread.published + '&lat=' + post.thread.lat + '&lng=' + post.thread.lng + '&method=post" data-method="post"><i class="far fa-bookmark col-xs-2"></i></a> </div>';
         };
-
-            // var contentHtml = function(city, posts) {
-            //   var html = [];
-
-            //   html.push("<h2 class='titolo'>"+city+"</h2>");
-
-            //   posts.forEach(function(post) {
-            //     html.push("<br>");
-            //     html.push(line(post));
-            //   });
-
-            //   return html.join("");
-            // }
 
 
             var contentHtml = function(city, posts) {

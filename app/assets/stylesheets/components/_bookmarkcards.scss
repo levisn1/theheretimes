@@ -12,64 +12,76 @@
   margin-top: 15px;
 }
 
-.card-bookmark {
-  background-size: cover !important;
-  background-position: center;
-  height: 165px;
-  margin-bottom: 25px;
-  border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-  background-color: white;
-  position: relative;
+.rowalignment1 {
+  display: flex;
+  justify-content: center;
 }
 
-.card-description {
-  padding-right: 8px;
+.rowalignment2 {
+  padding-bottom: 31px;
 }
-.card-description h2 {
-  margin: auto;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 600;
-  margin-top: 5%;
-  margin-bottom: 2%;
+
+.rowalignment3 {
+  display: flex;
+  justify-content: center
 }
+
+.card-bookmark {
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-decoration: none solid rgba(0, 0, 0, 0.87);
+  line-height: 20px;
+  background-size: cover !important;
+  background-position: center;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 2px 6px 0px, rgba(0, 0, 0, 0.04) 0px 0px 0px 1px;
+  transition: all 0.3s ease;
+  background-color: white;
+  width: 700px;
+  height: 130px;
+  padding: 20px;
+  img {
+  width: 80px;
+  height: 60px;
+}
+
 .card-description p {
-  font-size: 16px;
+  font-size: 14px;
   opacity: 0.7;
   font-weight: lighter;
+  text-align: left;
 }
 
 .card-description a {
+  font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 20px;
+  color: black;
+  transition: color .2s ease-in-out;
+  display: flex;
+  position: absolute;
+  top: 35px;
+}
+a:hover {
+  text-decoration: underline solid rgb(0, 0, 0);
   color: #132543;
-  text-decoration: none;
-  font-weight: 400;
-}
-
-
-.cards-bookmark-footer {
-}
-
-.cards-controls {
-position: absolute;
 }
 
 a.fa {
-  display: inline-block;
   padding: 5px;
+  position: absolute;
+  left: -4px;
+  top: -19px;
 }
 
 a.fa:hover {
   text-decoration: none;
-}
-
-.logo-article {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 80%;
-  padding-top: 30px;
 }
 
 .delete_button {
@@ -78,4 +90,15 @@ a.fa:hover {
   text-align: center;
   color: red;
   }
+}
+
+.bookmarkstitle {
+  font-family: Elsie;
+  font-size: 50px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  letter-spacing: normal;
+  color: black;
+  text-align: center;
 }
