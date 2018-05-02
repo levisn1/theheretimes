@@ -1,7 +1,7 @@
 require_relative 'webhoseio'
 
 class Webhose
-  WEBHOSE_KEY = "97914e5c-beb5-437a-a71c-126de5e15238"
+  WEBHOSE_KEY = "368c8041-830a-4e47-a8be-a194b5709cc7"
 
   def initialize(list_of_sorted_cities)
     @list_of_sorted_cities = list_of_sorted_cities
