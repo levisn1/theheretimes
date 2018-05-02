@@ -14,38 +14,52 @@
 </div>
 
 <div class="container">
-  <div class="container-fluid">
-    <div class="container-bookmarks">
-      <div class="row">
-        <div class="cards-container">
-          <% @bookmarks.each do |bookmark| %>
-          <div class="col-xs-12 rowalignment1">
-            <div class="card-bookmark">
-              <div class="row">
-                <div class="col-xs-3">
-                  <div class="row">
-                    <div class="col-xs-12 rowalignment2">
-                      <%= link_to "", bookmark_path(bookmark), method: :delete, class:"fa fa-times" %>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-xs-12 rowalignment3">
-                      <img src="//logo.clearbit.com/<%= bookmark[:source] %>">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-9">
-                  <div class="card-description">
-                    <p class="card_label_city"> <%= bookmark[:city] + "," %> <% str = bookmark[:published] %><% date = Date.parse str %><%= date.strftime('%d %b %Y') %> </p>
-                    <h2><%= link_to bookmark[:title], bookmark[:url], target: '_blank' %></h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <% end %>
-        </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>Bookmarks</h2>
+    </div>
+    <div class="col-sm-3">
+      <div class="btn-group">
+        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li class="category-li">Economy</li>
+          <li class="category-li">Sports</li>
+          <li class="category-li">Science</li>
+          <li class="category-li">Editorial</li>
+          <li class="category-li">Arts</li>
+          <li class="category-li">Health</li>
+        </ul>
       </div>
     </div>
+    <div class="col-sm-3">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @bookmarks.each do |bookmark| %>
+      <div class="col-sm-6">
+        <div class="card grow">
+          <div class="card-img-top">
+            <h5><%= bookmark[:city] %></h5>
+          </div>
+          <div class="card-body">
+            <div class="row">
+            <div class="col-sm-3">
+              <img class="bookmark_page_logo" src="//logo.clearbit.com/<%= bookmark[:source] %>/">
+            </div>
+            <div class="col-sm-9">
+              <h5 class="card-title"><%= link_to bookmark[:title], bookmark[:url], target: '_blank' %></h5>
+              <p class="card-text"><% str = bookmark[:published] %><% date = Date.parse str %><%= date.strftime('%d %b %Y') %></p>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
