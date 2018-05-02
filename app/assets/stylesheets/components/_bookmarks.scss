@@ -8,3 +8,54 @@
   display: flex;
   justify-content: center;
 }
+
+.card {
+  background: #fff;
+  border-radius: 2px;
+  border: 1px solid gray;
+  margin-top: 28px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.1);
+  transition: all 0.5s cubic-bezier(.25,.8,.25,1);
+}
+
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.05), 0 10px 10px rgba(0,0,0,0.05);
+}
+
+.icon {
+  top: 24px;
+  left: 50px;
+  color: white;
+}
+
+.card-img-top {
+  background-color: $blue;
+  color: white;
+  h5 {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 10px;
+    font-weight: lighter;
+  }
+}
+
+.input-group {
+  margin-top: 30px;
+}
+
+.dropdown-toggle {
+  margin-top: 32px;
+  width: 150px;
+}
+
+.category-li {
+  padding-left: 5px;
+}
+
+.bookmark_page_logo {
+  opacity: 0.75;
+}
+
+body {
+  background: #e2e1e0;
+}
