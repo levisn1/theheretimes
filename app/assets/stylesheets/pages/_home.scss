@@ -1,8 +1,11 @@
 // Specific CSS for your home-page
+.home-main-div {
+  display: flex;
+}
 .sidenav {
-    height: 100%;
-    width: 25%;
-    position: fixed;
+    // height: 100%;
+    max-width: 30%;
+    // position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
@@ -45,7 +48,7 @@
 
 /* Style page content */
 .main {
-    margin-left: 25%;
+  flex-grow: 1;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
@@ -57,7 +60,7 @@
 .logo {
   height: 250px;
   // border-bottom: 1px solid white;
-  margin-left: 50px;
+  margin: auto 50px;
   // margin-left:auto;
   // margin-right:auto;
   // margin: 0 auto;
