@@ -25,9 +25,6 @@
       document.getElementById("loader").classList.toggle("loader");
     });
 
-
-
-
     var center = {lat: <%= center[:lat].to_s %>, lng: <%= center[:lng].to_s %>};
 
     var map = new google.maps.Map(document.getElementById('map'), {
