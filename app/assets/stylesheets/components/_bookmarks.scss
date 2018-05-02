@@ -22,6 +22,12 @@
   box-shadow: 0 14px 28px rgba(0,0,0,0.05), 0 10px 10px rgba(0,0,0,0.05);
 }
 
+.icon {
+  top: 24px;
+  left: 50px;
+  color: white;
+}
+
 .card-img-top {
   background-color: $blue;
   color: white;
@@ -47,7 +53,7 @@
 }
 
 .bookmark_page_logo {
-  padding: 0px;
+  opacity: 0.75;
 }
 
 body {
